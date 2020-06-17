@@ -71,3 +71,4 @@ gem 'haml-rails'
 group :production do
   gem 'unicorn'
 end
+gem 'devise'

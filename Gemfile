@@ -72,3 +72,6 @@ group :production do
   gem 'unicorn'
 end
 gem 'devise'
+gem 'jquery-rails'
+gem 'pry-rails'
+gem 'payjp'

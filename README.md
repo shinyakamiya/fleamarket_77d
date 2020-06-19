@@ -1,3 +1,7 @@
+## ER図
+[FLEAMARKET.ER図 (3).pdf](https://github.com/shinyakamiya/fleamarket_77d/files/4803664/FLEAMARKET.ER.3.pdf)
+
+
 ## Users
 |Column|Type|Options|
 |------------|------------|------------|

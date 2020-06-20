@@ -1,5 +1,6 @@
 ## ER図
-![FLEAMARKET ER図](https://user-images.githubusercontent.com/65549551/85119004-16f34b00-b25c-11ea-89f6-30bb54d73286.png)
+![FLEAMARKET ER図 (1)](https://user-images.githubusercontent.com/65549551/85198283-6734e080-b322-11ea-8bcc-11564dd8438d.png)
+
 
 
 ## Users
@@ -7,9 +8,10 @@
 |------------|------------|------------|
 |nickname|string|null: false, index|
 |email|string|null: false, unique: true|
-|enctypted_password|string|null: false, unique: true|
+|enctypted_password|string|null: false|
 ### Association
-- has_one :profiles, dependent: :destroy- has_one :address, dependent: :destroy
+- has_one :profiles, dependent: :destroy
+- has_one :domicile, dependent: :destroy
 - has_one :credit_card, dependent: :destroy
 - has_one :SNS_authentification, dependent: :destroy
 - has_many :products, dependent: :destroy
@@ -17,6 +19,7 @@
 - has_many :commented_products, through: :favorites, source: :products
 - has_many :favorites, dependent: :destroy
 - has_many :fav_products, through: :favorites, source: :products
+
 
 
 ## Profiles
@@ -35,28 +38,21 @@
 - belongs_to :user
 
 
-## Address
+
+## Domiciles
 |Column|Type|Options|
 | ------------ | ------------ | ------------ |
 |user_id|references|null: false, foreign_key: true|
 |postal_code|integer(7)|null: false|
-|shipping_origin_id|references|null: false, foreign_key: true|
+|prefecture_id(acitve_hash)|integer|null: false|
 |city|string|null: false|
 |town|string|null: false|
 |building|string||
 |phone|integer|
 ### Association
 - belongs_to :user
-- belongs_to :shipping_origin
+- belongs_to_active_hash :prefecture
 
-
-## Shipping_origins
-|Column|Type|Options|
-| ------------ | ------------ | ------------ |
-|prefecture|string|null: false|
-### Association
-- has_many :address
-- has_many :products
 
 
 ## Credit_cards
@@ -68,6 +64,7 @@
 - belongs_to :user
 
 
+
 ## SNS_authentification
 |Column|Type|Options|
 | ------------ | ------------ | ------------ |
@@ -77,6 +74,7 @@
 |token|text||
 ### Association
 - belongs_to :user
+
 
 
 ## Comments
@@ -112,17 +110,17 @@
 |condition|integer|null: false|
 |category_id|reference|null: false, foreign_key: true|
 |postage|integer|null: false|
-|shipping_origin_id|reference|null: false, foreign_key: true|
+|prefecture_id(acitve_hash)|null: false, foreign_key: true|
 |delivery_time|integer|null: false|
 |pricing|integer|null: false|
 ### Association
 - belongs_to :user, dependent: :destroy
 - belongs_to :category, dependent: :destroy
+- belongs_to_active_hash :prefecture
 - has_many :comments, dependent: :destroy
 - has_many :users, through: :comments
 - has_many :favorites, dependent: :destroy
 - has_many :users, through: :favorites
-- has_many :shipping_origins, dependent: :destroy
 - has_many :product_images, dependent: :destroy
 
 

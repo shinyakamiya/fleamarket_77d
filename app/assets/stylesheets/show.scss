@@ -1,22 +1,22 @@
 .main {
   background: #f8f8f8;
-  height: 200vh;
+  height: 250vh;
   .showMain {
     padding: 40px;
     margin: 0 auto;
-    .contentRight {
+    &__contentRight {
       width: 700px;
       margin: 0 auto;
       .topContent{
-        .itemBox {
+        &__itemBox {
           background-color: #fff;
           padding: 24px 40px 40px;
-          .itemBox__name {
+          &__name {
             text-align: center;
             font-weight: bold;
             font-size: 24px;
           }
-          .itemBox__body {
+          &__body {
             margin: 16px 0 0;
             ul {
               display: flex;
@@ -47,7 +47,7 @@
               }
             }
           }
-          .itemBox__price{
+          &__price{
             margin: 24px 0 24px;
             text-align: center;
             display: flex;
@@ -57,11 +57,11 @@
               font-weight: bold;
               margin: 0 10px 0 0;
             }
-            .itemBox__price-detail {
+            &__detail {
               font-size: 16px;
             }
           }
-          .item-buy-btn {
+          .PurchaseBtn {
             display: block;
             margin-top: 16px;
             background: #3CCACE;

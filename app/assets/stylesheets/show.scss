@@ -203,6 +203,9 @@
         list-style: none;
         li {
           float: left;
+          i{
+            color: #3CCACE;
+          }
           a {
             text-decoration: none;
             color: #3CCACE;
@@ -215,6 +218,7 @@
       .relatedItems{
         margin: 0;
         padding: 0;
+        
         a {
           display: block;
           margin: 24px 0 8px;

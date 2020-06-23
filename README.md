@@ -1,5 +1,5 @@
 ## ER図
-![FLEAMARKET ER図 (1)](https://user-images.githubusercontent.com/65549551/85198283-6734e080-b322-11ea-8bcc-11564dd8438d.png)
+![FLEAMARKET ER図](https://user-images.githubusercontent.com/65549551/85359397-13f4a500-b551-11ea-91fb-da73712b3d6d.png)
 
 
 
@@ -9,8 +9,14 @@
 |nickname|string|null: false, index|
 |email|string|null: false, unique: true|
 |enctypted_password|string|null: false|
+|first_name|string|null: false|
+|last_name|string|null: false|
+|first_name_kana|string|null: false|
+|last_name_kana|string|null: false|
+|birth_day|date|null: false|
+|self_introduction|text||
+|image|string||
 ### Association
-- has_one :profiles, dependent: :destroy
 - has_one :domicile, dependent: :destroy
 - has_one :credit_card, dependent: :destroy
 - has_one :SNS_authentification, dependent: :destroy
@@ -21,34 +27,16 @@
 - has_many :fav_products, through: :favorites, source: :products
 
 
-
-## Profiles
-|Column|Type|Options|
-|------------|------------|------------|
-|user_id|references|null: false, foreign_key: true|
-|first_name|string|null: false|
-|last_name|string|null: false|
-|first_name_kana|string|null: false|
-|last_name_kana|string|null: false|
-|birth_year|date|null: false|
-|birth_month|date|null: false|
-|birth_date|date|null: false|
-|image|string||
-### Association
-- belongs_to :user
-
-
-
 ## Domiciles
 |Column|Type|Options|
 | ------------ | ------------ | ------------ |
 |user_id|references|null: false, foreign_key: true|
-|postal_code|integer(7)|null: false|
+|postal_code|integer|null: false|
 |prefecture_id(acitve_hash)|integer|null: false|
 |city|string|null: false|
 |town|string|null: false|
 |building|string||
-|phone|integer|
+|phone|biginit(20)|unique: true|
 ### Association
 - belongs_to :user
 - belongs_to_active_hash :prefecture
@@ -59,7 +47,8 @@
 |Column|Type|Options|
 |------------|------------|------------|
 |user_id|reference|null: false, foreign_key: true|
-|payjp_id|string|null: false|
+|customer_id|string|null: false|
+|card_id|string|null: false|
 ### Association
 - belongs_to :user
 
@@ -107,16 +96,19 @@
 |buyer_id|reference|null: false, foreign_key: true|
 |name|string|null: false, index|
 |description|text|null: false|
-|condition|integer|null: false|
+|condition_id(acitve_hash)|null: false, foreign_key: true|
 |category_id|reference|null: false, foreign_key: true|
-|postage|integer|null: false|
+|postage_id(acitve_hash)|null: false, foreign_key: true|
 |prefecture_id(acitve_hash)|null: false, foreign_key: true|
-|delivery_time|integer|null: false|
+|preparation_day_id(acitve_hash)|null: false, foreign_key: true|
 |pricing|integer|null: false|
 ### Association
 - belongs_to :user, dependent: :destroy
 - belongs_to :category, dependent: :destroy
 - belongs_to_active_hash :prefecture
+- belongs_to_active_hash :condition
+- belongs_to_active_hash :postage
+- belongs_to_active_hash :preparation_day
 - has_many :comments, dependent: :destroy
 - has_many :users, through: :comments
 - has_many :favorites, dependent: :destroy

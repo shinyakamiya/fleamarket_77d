@@ -1,2 +1,6 @@
 %h1 Items#index
 %p Find me in app/views/items/index.html.haml
+
+= link_to '新規登録', '/users/sign_up'
+= link_to "ログイン", '/users/sign_in'
+= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'btn'

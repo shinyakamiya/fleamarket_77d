@@ -36,7 +36,7 @@
 |last_name_kana|string|null: false|
 |user_id|references|null: false, foreign_key: true|
 |postal_code|integer|null: false|
-|prefecture_id(acitve_hash)|integer|null: false|
+|prefecture_id(acitve_hash)|references|null: false, foreign_key: true|
 |city|string|null: false|
 |town|string|null: false|
 |building|string||
@@ -100,11 +100,11 @@
 |buyer_id|references|null: false, foreign_key: true|
 |name|string|null: false, index|
 |description|text|null: false|
-|condition_id(acitve_hash)|integer|null: false, foreign_key: true|
-|category_id|reference|null: false, foreign_key: true|
-|postage_id(acitve_hash)|integer|null: false, foreign_key: true|
-|prefecture_id(acitve_hash)|integer|null: false, foreign_key: true|
-|preparation_day_id(acitve_hash)|integer|null: false, foreign_key: true|
+|condition_id(acitve_hash)|references|null: false, foreign_key: true|
+|category_id|references|null: false, foreign_key: true|
+|postage_id(acitve_hash)|references|null: false, foreign_key: true|
+|prefecture_id(acitve_hash)|references|null: false, foreign_key: true|
+|preparation_day_id(acitve_hash)|references|null: false, foreign_key: true|
 |pricing|integer|null: false|
 ### Association
 - belongs_to :user, dependent: :destroy

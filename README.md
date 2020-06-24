@@ -1,5 +1,5 @@
 ## ER図
-![FLEAMARKET ER図](https://user-images.githubusercontent.com/65549551/85359397-13f4a500-b551-11ea-91fb-da73712b3d6d.png)
+![FLEAMARKET ER図 (1)](https://user-images.githubusercontent.com/65549551/85498168-2555b400-b61a-11ea-92ce-009f6dafbdcc.png)
 
 
 
@@ -30,6 +30,10 @@
 ## Domiciles
 |Column|Type|Options|
 | ------------ | ------------ | ------------ |
+|first_name|string|null: false|
+|last_name|string|null: false|
+|first_name_kana|string|null: false|
+|last_name_kana|string|null: false|
 |user_id|references|null: false, foreign_key: true|
 |postal_code|integer|null: false|
 |prefecture_id(acitve_hash)|integer|null: false|
@@ -46,7 +50,7 @@
 ## Credit_cards
 |Column|Type|Options|
 |------------|------------|------------|
-|user_id|reference|null: false, foreign_key: true|
+|user_id|references|null: false, foreign_key: true|
 |customer_id|string|null: false|
 |card_id|string|null: false|
 ### Association
@@ -69,8 +73,8 @@
 ## Comments
 |Column|Type|Options|
 | ------------ | ------------ | ------------ |
-|product_id|reference|null: false, foreign_key: true|
-|user_id|reference|null: false, foreign_key: true|
+|product_id|references|null: false, foreign_key: true|
+|user_id|references|null: false, foreign_key: true|
 |comment|text|null: false|
 ### Association
 - belongs_to :product
@@ -81,8 +85,8 @@
 ## Favorites
 |Column|Type|Options|
 | ------------ | ------------ | ------------ |
-|product_id|reference|null: false, foreign_key: true|
-|user_id|reference|null: false, foreign_key: true|
+|product_id|references|null: false, foreign_key: true|
+|user_id|references|null: false, foreign_key: true|
 ### Association
 - belongs_to :product
 - belongs_to :user
@@ -92,15 +96,15 @@
 ## Products
 |Column|Type|Options|
 | ------------ | ------------ | ------------ |
-|seller_id|reference|null: false, foreign_key: true|
-|buyer_id|reference|null: false, foreign_key: true|
+|seller_id|references|null: false, foreign_key: true|
+|buyer_id|references|null: false, foreign_key: true|
 |name|string|null: false, index|
 |description|text|null: false|
-|condition_id(acitve_hash)|null: false, foreign_key: true|
+|condition_id(acitve_hash)|integer|null: false, foreign_key: true|
 |category_id|reference|null: false, foreign_key: true|
-|postage_id(acitve_hash)|null: false, foreign_key: true|
-|prefecture_id(acitve_hash)|null: false, foreign_key: true|
-|preparation_day_id(acitve_hash)|null: false, foreign_key: true|
+|postage_id(acitve_hash)|integer|null: false, foreign_key: true|
+|prefecture_id(acitve_hash)|integer|null: false, foreign_key: true|
+|preparation_day_id(acitve_hash)|integer|null: false, foreign_key: true|
 |pricing|integer|null: false|
 ### Association
 - belongs_to :user, dependent: :destroy
@@ -120,7 +124,7 @@
 ## Product_images
 |Column|Type|Options|
 | ------------ | ------------ | ------------ |
-|product_id|reference|null: false, foreign_key: true|
+|product_id|references|null: false, foreign_key: true|
 |product_image|string|null: false|
 ### Association
 - belongs_to :product

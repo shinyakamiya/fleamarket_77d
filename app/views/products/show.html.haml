@@ -1,59 +1,87 @@
 .main
-  .header
-    = image_tag ('material/logo/logo.png'), class: "logo"
-  .main__box
-
-    %section.main__box__title
-      会員情報入力
-    %section.Product-information
-      .Product-information-box
-        .image
-          %img.sc-eNPDpu.iqGLTS{:alt => "NC10 シャネル マトラッセ サングラス ココマーク ケース付き", :src => "https://static.mercdn.net/item/detail/orig/photos/m39708631815_1.jpg?1589347597"}/
-        .comment
-          %p.com
-            nc10 シャネル マトラッセ サングラス
-          %p.com2
-            ¥20000
-            （税込) 送料込み
-    %section.payment
-      .payment-box
-        .cSGTly
-          %span 支払い金額
-          %span.jYZlcv ¥10,599
-        .jReTKH
-          %label{:for => "point-checkbox-id"}
-            %span.kRgxCd
-              ポイントを使用（所持ポイント: P0）
-    %section.payment-methods
-      .comment
-        .comment1
-          %h3 支払い方法
-        %a.hJNIGG{:href => "/jp/transaction/card/m47229055619/"}
-          %svg{"aria-hidden" => "true", :fill => "#0095ee", "fill-rule" => "evenodd", :height => "16", :viewbox => "0 0 24 24", :width => "16"}
-            %path{:d => "M17.51,11.3H12.7v-5a.7.7,0,0,0-1.4,0v5h-5a.7.7,0,0,0,0,1.4h5v4.81a.7.7,0,0,0,1.4,0V12.7h4.81a.7.7,0,0,0,0-1.4Z"}
-            %path{:d => "M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18.6A8.6,8.6,0,1,1,20.6,12,8.61,8.61,0,0,1,12,20.6Z"}
-          %span 登録してください
-    %section.Shipping
-      .box
-        .dVXrhZ
-          %h3 配送先
-          %a.sc-SFOxd.dZdLmH{:href => "/jp/transaction/address/m47229055619/"} 変更する
-        .comment
-          %p 〒000-0000
-          %p 神奈川県〇〇市55-88
-          %p 宮本 大介
-    %section.comment
-      .comment1
-        %p.eYgRch 支払方法の入力するを完了してください。
-        .comment2 購入する
-  #footer
-    .footer-box
-      %ul
+  .showMain
+    .contentLeft
+    .showMain__contentRight
+      .topContent
+        .topContent__itemBox
+          %h2.itemBox__name product2
+          .topContent__itemBox__body
+            %ul
+              %li
+                = link_to image_tag("material/logo/logo.png", width: '375'), '#'
+                %ul
+                  %li
+                    = link_to image_tag("material/logo/logo.png", width: '75',height: '75'), '#'
+                  %li
+                    = link_to image_tag("material/logo/logo.png", width: '75',height: '75'), '#'
+                  %li
+                    = link_to image_tag("material/logo/logo.png", width: '75',height: '75'), '#'
+          .topContent__itemBox__price
+            %span
+              ¥20000
+            .topContent__itemBox__price__detail
+              %span
+                (税込)
+              %span
+                送料込み
+            = link_to ("購入画面に進む"),'/products/:id/purchase',class: "PurchaseBtn"
+          .itemDetail 親譲りの無鉄砲で小供の時から損ばかりしている。小学校に居る時分学校の二階から飛び降りて一週間ほど腰を抜かした事がある。なぜそんな無闇をしたと聞く人があるかも知れぬ。別段深い理由でもない。新築の二階から首を出していたら、同級生の一人が冗談に、いくら威張っても、そこから飛び降りる事は出来まい。弱虫やーい。と囃したからである。小使に負ぶさって帰って来た時、おやじが大きな眼をして二階ぐらいから飛び降りて腰
+          .table
+            %table
+              %tbody
+                %tr
+                  %th 出品者
+                  %td hoge
+                %tr
+                  %th カテゴリー
+                  %td
+                    = link_to ("メンズ"),'#'
+                    %br/
+                    = link_to ("ジャケット/アウター"),'#'
+                    %br/
+                    = link_to ("ノーカラージャケット"),'#'
+                %tr
+                  %th 商品の状態
+                  %td 新品/未使用
+                %tr
+                  %th 配送料の負担
+                  %td 着払い（購入者負担）
+                %tr
+                  %th 発送元の地域
+                  %td
+                    = link_to ("青森県"),'#'
+                %tr
+                  %th 発送日の目安
+                  %td 1-2日で発送
+          .optionalArea
+            %ul
+              %li#likeBtn.optionalBtn.likeBtn
+                = icon("fas", "book")
+                お気に入り 0
+            %ul.optional
+              %li.optionalBtn
+                = link_to ("不適切な商品の通報"),'#' 
+        .commentBox
+          %ul.commentContents
+          %form#new_comment.new_comment{"accept-charset" => "UTF-8", :action => "#", :method => "post"}
+            %input{:name => "utf8", :type => "hidden", :value => "✓"}/
+            %input{:name => "authenticity_token", :type => "hidden", :value => "yp/QcQnE9PRzexqN3LPb7drKH2IdB6YiaPFBEvlw/ljgtAacLtRrjhRvw1d3C27HPf+Q0DGqMLafQH9ZpYVopA=="}/
+            %textarea#comment_body{:name => "comment[body]", :required => "required"}
+            %p.noticeMsg
+              相手のことを考え丁寧なコメントを心がけましょう。
+              %br/
+              不快な言葉遣いなどは利用制限や退会処分となることがあります。
+            %br/
+            %button.commentBtn{:name => "button", :type => "submit"}
+              コメントする
+      %ul.links
         %li
-          %a{:href => "/jp/privacy/"} プライバシーポリシー
+          %i.fas.fa-chevron-left
+          = link_to ("前の商品"),'#'
         %li
-          %a{:href => "/jp/tos/"} 利用規約
-        %li
-          %a{:href => "/jp/tokutei/"} 特定商取引に関する表記
-    %a
-      = image_tag ('material/logo/logo.png'), class: "logo"
+          = link_to ("後ろの商品"),'#'
+          %i.fas.fa-chevron-right
+      .relatedItems
+        = link_to ("メンズをもっと見る"),'#'
+        .productLis
+        

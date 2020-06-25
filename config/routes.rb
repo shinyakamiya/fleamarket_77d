@@ -1,10 +1,14 @@
 Rails.application.routes.draw do
   get 'items/index'
-  resources :products, only: [:show]
+  resources :products, only: [:index, :show]  do
+    member do
+      get :purchase
+    end
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'items#index'
-  devise_for :users
-  root 'items#index'
+  # devise_for :users
+  # root 'items#index'
   devise_for :users, controllers: { registrations: 'users/registrations' 
   }
   devise_scope :user do

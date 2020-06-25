@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get 'items/index'
-  resources :products, only: [:index, :show]  do
+  resources :products, only: [:index, :show, :new]  do
     member do
       get :purchase
     end

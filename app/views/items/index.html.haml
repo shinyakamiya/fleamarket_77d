@@ -1,3 +1,312 @@
-%h1 Items#index
-%p Find me in app/views/items/index.html.haml
-= link_to "マイページ", '/users/show' 
+%header.pageheader
+  .headercontents
+    .mainheader
+      .icon
+        = link_to image_tag("material/logo/logo.png", class: "top-logo"), "#"
+      .search-box
+        %form.search-box__form{"accept-charset" => "UTF-8", :action => "#", :method => "get"}
+          %input{:name => "utf-8", :type => "hidden", :value => ""}/
+          %input{:name => "key", :placeholder => "キーワードから探す"}/
+          %button.search-box__form--button{:type => "submit"}
+            .search-icon
+              = image_tag("material/icon/icon-search 1.png", class: "search-img")
+
+    .navigator
+      %ul.left-lists
+        %li.left-lists--left
+          = link_to 'カテゴリー','#',class:'btn'
+        %li.left-lists--right
+          = link_to 'ブランド','#',class:'btn'
+      %ul.right-lists
+      - if user_signed_in?
+        %li.right-lists--right
+          = link_to 'ログアウト', destroy_user_session_path, method: :delete, class:'btn'
+      - else
+        %li.right-lists--left
+          = link_to 'ログイン', new_user_session_path,class:'btn'
+        %li.right-lists--right
+          = link_to '新規登録', new_user_registration_path, class:'btn'
+
+
+.mainwrapper
+  %section.topmainvisual
+    .contents
+      .content__title
+        %br/
+        人生を変えるフリマアプリ
+      %p.content__text
+        FURIMAは誰でも簡単に出品・購入できる
+        %br/
+        フリマアプリです
+      .content__btn
+        .content__btn--appstore
+          = link_to image_tag("material/logo/download-on-the-app-store-apple-2.svg", class: "appstore"), "https://apps.apple.com/jp/app/%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%AB-%E3%83%AC%E3%82%B8%E3%82%A7%E3%83%B3%E3%82%BA/id1358232022"
+        .content__btn--googleplay
+          = link_to image_tag("material/logo/google-play-badge.svg", class: "googleplay"), "https://play.google.com/store/apps/details?id=com.bandainamcoent.dblegends_jp"
+
+  %section.topintroduction
+    .subtitle
+      FURIMAが選ばれる3つの理由
+    %ul.lists
+      %li.list
+        .list__photo
+          = image_tag("material/pict/pict-reason-01.jpg", class: "reasonimage")
+          .list__number
+            1
+        .list__title
+          %span
+            3分
+          ですぐに出品
+        %p.list__description
+          スマホで入力するだけで簡単に出品できる！
+
+      %li.list
+        .list__photo
+          = image_tag("material/pict/pict-reason-02.jpg", class: "reasonimage")
+          .list__number
+            2
+        .list__title
+          %span
+            シンプル
+          で使いやすい
+        %p.list__description
+          めんどくさい入力は必要なく、検索も購入もスムーズ！
+      %li.list
+        .list__photo
+          = image_tag("material/pict/pict-reason-03.jpg", class: "reasonimage")
+          .list__number
+            3
+        .list__title
+          手数料
+          %span
+            業界最安
+        .list__description
+          最大3%でお得に出品&購入！
+
+  %section.topmiddleapp
+    .middle-container
+      .middle-container__title
+        会員数日本1位
+      %p.middle-container__text
+        FURIMAは、フリマアプリで最も人気。
+        %br/
+        出品・購入回数も業界最多です！
+        %br/
+        ほしかったあの商品に出会えるかもしれません。
+      .content__btn
+        .content__btn--appstore
+          = link_to image_tag("material/logo/download-on-the-app-store-apple-2.svg", class: "appstore"), "https://apps.apple.com/jp/app/%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%AB-%E3%83%AC%E3%82%B8%E3%82%A7%E3%83%B3%E3%82%BA/id1358232022"
+        .content__btn--googleplay
+          = link_to image_tag("material/logo/google-play-badge.svg", class: "googleplay"), "https://play.google.com/store/apps/details?id=com.bandainamcoent.dblegends_jp"
+
+  %section.topfeature
+    .features
+      FURIMAの特徴
+    %ul.feature-lists
+      %li.feature-list
+        .feature-list__photo
+          = image_tag("material/icon/icon-01.png", class: "featureimage")
+        .feature-list__title
+          簡単に売り買いできる
+        %p.feature-list__description
+          スマホひとつで、いつでもどこでも簡単に出品・購入が可能！
+      %li.feature-list
+        .feature-list__photo
+          = image_tag("material/icon/icon-03.png", class: "featureimage")
+        .feature-list__title
+          売上金は翌年振込みに対応
+        %p.feature-list__description
+          午前9時までに振込を依頼いただければ、翌年に指定の口座に入金いたします!
+      %li.feature-list
+        .feature-list__photo
+          = image_tag("material/icon/icon-04.png", class: "featureimage")
+        .feature-list__title
+          様々な支払いに対応
+        %p.feature-list__description
+          お支払いは、クレジットカードだけでなく、ポイントや売上金など多彩な方法があります。
+
+  %section.pickupcontainer
+    .pickup-title
+      ピックアップカテゴリー
+    .pickup-products
+      .pickup-products__head
+        = link_to "新規投稿商品", '/', class: "pickup-link"
+      .pickup-lists
+        .pickup-list
+          = link_to "/", class: "productdetail-link" do
+            .pickup-list__photo
+              = image_tag("material/products/medical_mask_urethane.png", class: "pickupproduct-image")
+            .pickup-list__text
+              .product-name
+                マスク
+              .product-details
+                %ul
+                  %li.price
+                    1000円
+                  %li.like
+                    ★0
+                .tax
+                  （税込）
+        .pickup-list
+          = link_to "/", class: "productdetail-link" do
+            .pickup-list__photo
+              = image_tag("material/products/pleats_mask_hida.png", class: "pickupproduct-image")
+            .pickup-list__text
+              .product-name
+                マスク
+              .product-details
+                %ul
+                  %li.price
+                    1000円
+                  %li.like
+                    ★0
+                .tax
+                  （税込）
+        .pickup-list
+          = link_to "/", class: "productdetail-link" do
+            .pickup-list__photo
+              = image_tag("material/products/butoukai_kamen.png", class: "pickupproduct-image")
+            .pickup-list__text
+              .product-name
+                マスク？
+              .product-details
+                %ul
+                  %li.price
+                    1000円
+                  %li.like
+                    ★0
+                .tax
+                  （税込）
+        .pickup-list
+          = link_to "/", class: "productdetail-link" do
+            .pickup-list__photo
+              = image_tag("material/products/medical_mask_n95.png", class: "pickupproduct-image")
+            .pickup-list__text
+              .product-name
+                マスク
+              .product-details
+                %ul
+                  %li.price
+                    1000円
+                  %li.like
+                    ★0
+                .tax
+                  （税込）
+
+  %section.pickupcontainer
+    .pickup-title
+      ピックアップブランド
+    .pickup-products
+      .pickup-products__head
+        = link_to "アーカイバ", '/', class: "pickup-link"
+      .pickup-lists
+        .pickup-list
+          = link_to "/", class: "productdetail-link" do
+            .pickup-list__photo
+              = image_tag("material/products/medical_mask_urethane.png", class: "pickupproduct-image")
+            .pickup-list__text
+              .product-name
+                マスク
+              .product-details
+                %ul
+                  %li.price
+                    1000円
+                  %li.like
+                    ★0
+                .tax
+                  （税込）
+        .pickup-list
+          = link_to "/", class: "productdetail-link" do
+            .pickup-list__photo
+              = image_tag("material/products/pleats_mask_hida.png", class: "pickupproduct-image")
+            .pickup-list__text
+              .product-name
+                マスク
+              .product-details
+                %ul
+                  %li.price
+                    1000円
+                  %li.like
+                    ★0
+                .tax
+                  （税込）
+        .pickup-list
+          = link_to "#", class: "productdetail-link" do
+            .pickup-list__photo
+              = image_tag("material/products/butoukai_kamen.png", class: "pickupproduct-image")
+            .pickup-list__text
+              .product-name
+                マスク？
+              .product-details
+                %ul
+                  %li.price
+                    1000円
+                  %li.like
+                    ★0
+                .tax
+                  （税込）
+        .pickup-list
+          = link_to "#", class: "productdetail-link" do
+            .pickup-list__photo
+              = image_tag("material/products/medical_mask_n95.png", class: "pickupproduct-image")
+            .pickup-list__text
+              .product-name
+                マスク
+              .product-details
+                %ul
+                  %li.price
+                    1000円
+                  %li.like
+                    ★0
+                .tax
+                  （税込）
+
+%aside.bottum-app
+  .bottum-content
+    .headlines
+      .headlines__title
+        だれでもかんたん、人生を変えるフリマアプリ
+      .headlines__text
+        今すぐ無料ダウンロード！
+      .content__btn
+        .content__btn--appstore
+          = link_to image_tag("material/logo/download-on-the-app-store-apple-2.svg", class: "appstore"), "https://apps.apple.com/jp/app/%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%AB-%E3%83%AC%E3%82%B8%E3%82%A7%E3%83%B3%E3%82%BA/id1358232022"
+        .content__btn--googleplay
+          = link_to image_tag("material/logo/google-play-badge.svg", class: "googleplay"), "https://play.google.com/store/apps/details?id=com.bandainamcoent.dblegends_jp"
+
+.footer
+  %ul.contents
+    %li.content
+      .content__top
+        FURIMAについて
+      %ul.content__lists
+        %li.content__lists--list
+          = link_to "会社概要（運営会社）","#", class: "footer-link"
+        %li.content__lists--list
+          = link_to "プライバシーポリシー","#", class: "footer-link"
+        %li.content__lists--list
+          = link_to "FURIMA利用規約","#", class: "footer-link"
+        %li.content__lists--list
+          = link_to "ポイントに関する特約","#", class: "footer-link"
+    %li.content
+      .content__top
+        FURIMAを見る
+      %ul.content__lists
+        %li.content__lists--list
+          = link_to "カテゴリー一覧","#", class: "footer-link"
+        %li.content__lists--list
+          = link_to "ブランド一覧","#", class: "footer-link"
+    %li.content
+      .content__top
+        ヘルプ＆ガイド
+      %ul.content__lists
+        %li.content__lists--list
+          = link_to "FURIMAガイド","#", class: "footer-link"
+        %li.content__lists--list
+          = link_to "FURIMAロゴ利用ガイドライン","#", class: "footer-link"
+        %li.content__lists--list
+          = link_to "お知らせ","#", class: "footer-link"
+  .footer__logo
+    = link_to image_tag("material/logo/logo-white.png", class: "footer-logo"), "#"
+  .footer__logotext
+    © FURIMA

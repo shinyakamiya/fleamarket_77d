@@ -19,18 +19,36 @@ ActiveRecord::Schema.define(version: 2020_06_25_050756) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+ActiveRecord::Schema.define(version: 2020_06_24_050724) do
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "nickname"
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
+  create_table "domiciles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "firstname", null: false
+    t.string "lastname", null: false
+    t.string "firstname_kana", null: false
+    t.string "lastname_kana", null: false
+    t.bigint "user_id", null: false
+    t.string "prefecture_id", null: false
+    t.integer "postal_code", null: false
+    t.string "city", null: false
+    t.string "town", null: false
+    t.string "building"
+    t.bigint "phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["user_id"], name: "index_domiciles_on_user_id"
   end
 
+  create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.integer "condition_id"
+    t.integer "postage_id"
+    t.integer "prefecture_id"
+    t.integer "preparation_day_id"
+    t.integer "pricing"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "domiciles", "users"
 end

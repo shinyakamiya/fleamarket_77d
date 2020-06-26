@@ -10,6 +10,6 @@ class UsersController < ApplicationController
 
   private
   def set_parents
-    # @parents = Category.where(ancestry: nil) 
+    # @parents = Category.where(ancestry: nil)
   end
 end

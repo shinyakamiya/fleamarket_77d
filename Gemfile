@@ -79,3 +79,4 @@ gem 'pry-rails'
 gem 'payjp'
 gem 'font-awesome-sass', '~> 5.4.1'
 gem 'active_hash'
+

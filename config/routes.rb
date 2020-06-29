@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get 'items/index'
-  resources :products, only: [:index, :show, :new]  do
+  resources :products, only: [:index, :show, :new, :create]  do
     member do
       get :purchase
     end
@@ -9,8 +9,7 @@ Rails.application.routes.draw do
   root 'items#index'
   # devise_for :users
   # root 'items#index'
-  devise_for :users, controllers: { registrations: 'users/registrations' 
-  }
+  devise_for :users, controllers: { registrations: 'users/registrations'}
   devise_scope :user do
     get 'domiciles', to: 'users/registrations#new_domicile'
     post 'domiciles', to: 'users/registrations#create_domicile'

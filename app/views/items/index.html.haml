@@ -19,6 +19,8 @@
           = link_to 'ブランド','#',class:'btn'
       %ul.right-lists
       - if user_signed_in?
+        %li.right-lists--left
+          = link_to 'マイページ', '#', class:'btn'
         %li.right-lists--right
           = link_to 'ログアウト', destroy_user_session_path, method: :delete, class:'btn'
       - else

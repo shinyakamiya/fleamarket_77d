@@ -14,7 +14,6 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
     if @product.save
       redirect_to root_path
-      # あとでページ変更する
     else
       render :new
     end

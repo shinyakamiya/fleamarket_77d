@@ -13,6 +13,14 @@ class Product < ApplicationRecord
   belongs_to_active_hash :preparation_day
   # 上記大野商品出品機能のため追記
 
+  # バリデーション
+  validates :prefecture, presence: true
+  validates :condition, presence: true
+  validates :postage, presence: true
+  validates :preparation_day, presence: true
+  validates :pricing, presence: true
+  validates :product_images, presence: true
+
  
   # has_many :comments, dependent: :destroy
   # has_many :users, through: :comments

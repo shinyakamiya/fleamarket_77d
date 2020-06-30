@@ -31,14 +31,14 @@
         .form
           =f.text_field :name, placeholder: "40文字まで"
           - if @product.errors.include?(:name)
-            %p{:style => "color: red;"}= @product.errors.full_messages_for(:name).first
+            %p= @product.errors.full_messages_for(:name).first
         %h1
         商品の説明
         %span 必須
         .form
           =f.text_area :description, size: "78%x7", placeholder: "商品の説明 (必須,1,000文字以内) (色、素材、重さ、定価、注意点など)   例) 2010年頃に1万円で購入したジャケットです。ライトグレーで傷はありません。合わせやすいのでおすすめです。"
           - if @product.errors.include?(:description)
-            %p{:style => "color: red;"}= @product.errors.full_messages_for(:description).first
+            %p= @product.errors.full_messages_for(:description).first
         %h2
         商品の詳細
         -# %h1
@@ -57,7 +57,7 @@
         .form
           =f.collection_select :condition_id, Condition.all, :id, :name, {prompt:"選択してください"}, {class:""}
           - if @product.errors.include?(:condition)
-            %p{:style => "color: red;"}= @product.errors.full_messages_for(:condition).first
+            %p= @product.errors.full_messages_for(:condition).first
         %h2
         配送について
         %h1
@@ -66,21 +66,21 @@
         .form
           =f.collection_select :postage_id, Postage.all, :id, :name, {prompt:"選択してください"}, {class:""}
           - if @product.errors.include?(:postage)
-            %p{:style => "color: red;"}= @product.errors.full_messages_for(:postage).first
+            %p= @product.errors.full_messages_for(:postage).first
         %h1
         発送元の地域
         %span 必須
         .form
           = f.collection_select :prefecture_id, Prefecture.all, :id, :name, {prompt:"選択してください"}, {class:""}
           - if @product.errors.include?(:prefecture)
-            %p{:style => "color: red;"}= @product.errors.full_messages_for(:prefecture).first
+            %p= @product.errors.full_messages_for(:prefecture).first
         %h1
         発送までの日数
         %span 必須
         .form
           =f.collection_select :preparation_day_id, PreparationDay.all, :id, :name, {prompt:"選択してください"}, {class:""}
           - if @product.errors.include?(:preparation_day)
-            %p{:style => "color: red;"}= @product.errors.full_messages_for(:preparation_day).first
+            %p= @product.errors.full_messages_for(:preparation_day).first
         %h2
         価格(¥300~9,999,999)  
         %h1
@@ -90,9 +90,9 @@
           =icon('fas','yen-sign')
           =f.text_field :pricing
           - if @product.errors.include?(:pricing)
-            %p{:style => "color: red;"}= @product.errors.full_messages_for(:pricing).first
+            %p= @product.errors.full_messages_for(:pricing).first
         .action
-          =f.submit "出品する"    
+          =f.submit "出品する"
   .newFooter
     .footercontents
       %ul.footerlists

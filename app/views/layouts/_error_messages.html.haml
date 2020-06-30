@@ -1,6 +1,6 @@
 = form_with(model: @product, local: true) do |form|
   - if @product.errors.any?
     #error_explanation
-      %h2{:style => "color: red;"}
+      %h2
         = pluralize(@product.errors.count, "箇所")
         記入・選択漏れがあります:

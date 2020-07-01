@@ -21,6 +21,10 @@
       margin: 0 auto;
       font-size: 14px;
       padding: 20px 0;
+      p {
+        color: red;
+        font-weight: bold;
+      }
       %h1 {
         padding-top: 20px;
       }

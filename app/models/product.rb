@@ -13,12 +13,16 @@ class Product < ApplicationRecord
   belongs_to_active_hash :preparation_day
   # 上記大野商品出品機能のため追記
 
+  
+  validates_associated :product_images
   # バリデーション
+  validates :name, presence: true, length: {maximum: 40}
+  validates :description, presence: true, length: {maximum: 1000}
   validates :prefecture, presence: true
   validates :condition, presence: true
   validates :postage, presence: true
   validates :preparation_day, presence: true
-  validates :pricing, presence: true
+  validates :pricing, presence: true, numericality: { only_integer: true, greater_than: 300, less_than: 10000000}
   validates :product_images, presence: true
 
  

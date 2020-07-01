@@ -1,6 +1,4 @@
-## ER図
-![FLEAMARKET ER図 (1)](https://user-images.githubusercontent.com/65549551/85498168-2555b400-b61a-11ea-92ce-009f6dafbdcc.png)
-
+![FLEAMARKET ER図 (2)](https://user-images.githubusercontent.com/65549551/86091787-71579b80-bae7-11ea-891c-a8ff60ad5159.png)
 
 
 ## Users
@@ -22,10 +20,7 @@
 - has_one :SNS_authentification, dependent: :destroy
 - has_many :products, dependent: :destroy
 - has_many :comments, dependent: :destroy
-- has_many :commented_products, through: :favorites, source: :products
 - has_many :favorites, dependent: :destroy
-- has_many :fav_products, through: :favorites, source: :products
-
 
 ## Domiciles
 |Column|Type|Options|
@@ -36,7 +31,7 @@
 |last_name_kana|string|null: false|
 |user_id|references|null: false, foreign_key: true|
 |postal_code|integer|null: false|
-|prefecture_id(acitve_hash)|integer|null: false|
+|prefecture_id(acitve_hash)|references|null: false, foreign_key: true|
 |city|string|null: false|
 |town|string|null: false|
 |building|string||
@@ -100,11 +95,11 @@
 |buyer_id|references|null: false, foreign_key: true|
 |name|string|null: false, index|
 |description|text|null: false|
-|condition_id(acitve_hash)|integer|null: false, foreign_key: true|
-|category_id|reference|null: false, foreign_key: true|
-|postage_id(acitve_hash)|integer|null: false, foreign_key: true|
-|prefecture_id(acitve_hash)|integer|null: false, foreign_key: true|
-|preparation_day_id(acitve_hash)|integer|null: false, foreign_key: true|
+|condition_id(acitve_hash)|references|null: false, foreign_key: true|
+|category_id|references|null: false, foreign_key: true|
+|postage_id(acitve_hash)|references|null: false, foreign_key: true|
+|prefecture_id(acitve_hash)|references|null: false, foreign_key: true|
+|preparation_day_id(acitve_hash)|references|null: false, foreign_key: true|
 |pricing|integer|null: false|
 ### Association
 - belongs_to :user, dependent: :destroy
@@ -114,9 +109,7 @@
 - belongs_to_active_hash :postage
 - belongs_to_active_hash :preparation_day
 - has_many :comments, dependent: :destroy
-- has_many :users, through: :comments
 - has_many :favorites, dependent: :destroy
-- has_many :users, through: :favorites
 - has_many :product_images, dependent: :destroy
 
 
@@ -125,7 +118,7 @@
 |Column|Type|Options|
 | ------------ | ------------ | ------------ |
 |product_id|references|null: false, foreign_key: true|
-|product_image|string|null: false|
+|src|string|null: false|
 ### Association
 - belongs_to :product
 

@@ -20,7 +20,7 @@
       %ul.right-lists
       - if user_signed_in?
         %li.right-lists--left
-          = link_to 'マイページ', '#', class:'btn'
+          = link_to 'マイページ', "/users/:id", class:'btn'
         %li.right-lists--right
           = link_to 'ログアウト', destroy_user_session_path, method: :delete, class:'btn'
       - else
@@ -132,10 +132,10 @@
       ピックアップカテゴリー
     .pickup-products
       .pickup-products__head
-        = link_to "新規投稿商品", '/', class: "pickup-link"
+        = link_to "新規投稿商品", '#', class: "pickup-link"
       .pickup-lists
         .pickup-list
-          = link_to "/", class: "productdetail-link" do
+          = link_to "/products/:id", class: "productdetail-link" do
             .pickup-list__photo
               = image_tag("material/products/medical_mask_urethane.png", class: "pickupproduct-image")
             .pickup-list__text

@@ -1,13 +1,22 @@
 class ProductsController < ApplicationController
   def index
+    @products = Product.all.order(created_at: :desc)
+    @product = ProductImage.all
   end
+
   def show
+    @products = Product.find(1)
+    # @parents = Category.where(ancestry: nil)
+    @prefecture = Prefecture.find(1)
+    @condition = Condition.find(1)
+    @preparationday = PreparationDay.find(1)
+    @user = User.find(1)
   end
 
   # 商品出品
   def new
     @product = Product.new
-    @product.product_images.new
+    # @product.product_images.new
   end
 
   def create

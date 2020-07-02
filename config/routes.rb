@@ -18,7 +18,5 @@ Rails.application.routes.draw do
   resources :credit_cards
   resources :users 
   resources :cards
-  
-    
   # root to: 'mypages#index'
 end

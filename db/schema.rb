@@ -54,16 +54,20 @@ ActiveRecord::Schema.define(version: 2020_06_30_031519) do
   end
 
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name"
-    t.text "description"
-    t.integer "condition_id"
-    t.integer "postage_id"
-    t.integer "prefecture_id"
-    t.integer "preparation_day_id"
-    t.integer "pricing"
+    t.bigint "seller_id"
+    t.bigint "buyer_id"
+    t.string "name", null: false
+    t.text "description", null: false
+    t.integer "condition_id", null: false
+    t.bigint "category_id"
+    t.integer "postage_id", null: false
+    t.integer "prefecture_id", null: false
+    t.integer "preparation_day_id", null: false
+    t.integer "pricing", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["buyer_id"], name: "index_products_on_buyer_id"
+    t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["seller_id"], name: "index_products_on_seller_id"
   end
 
@@ -87,4 +91,6 @@ ActiveRecord::Schema.define(version: 2020_06_30_031519) do
 
   add_foreign_key "domiciles", "users"
   add_foreign_key "product_images", "products"
+  add_foreign_key "products", "users", column: "buyer_id"
+  add_foreign_key "products", "users", column: "seller_id"
 end

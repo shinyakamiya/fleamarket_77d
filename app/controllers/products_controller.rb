@@ -8,7 +8,7 @@ class ProductsController < ApplicationController
     @images = ProductImage.all
   end
   def show
-    @products = Product.find(1)
+    @products = Product.find(params[:id])
     # @parents = Category.where(ancestry: nil)
     @prefecture = Prefecture.find(1)
     @condition = Condition.find(1)

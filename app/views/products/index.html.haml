@@ -4,7 +4,7 @@
       .icon
         = link_to image_tag("material/logo/logo.png", class: "top-logo"), "#"
       .search-box
-        %form.search-box__form{accept:{charset: { UTF: 8}}, action: "#", method: "get"}
+        %form.search-box__form{"accept-charset" => "UTF-8", action: "#", method: "get"}
           %input{name: "utf-8", type: "hidden", value: ""}/
           %input{name: "key", placeholder: "キーワードから探す"}/
           %button.search-box__form--button{type: "submit"}
@@ -34,26 +34,22 @@
       .pickup-products__head
         = link_to "新規投稿商品", '/', class: "pickup-link"
       .pickup-lists
-        .pickup-list
-          = link_to "/", class: "productdetail-link" do
-            .pickup-list__photo
-              - @product.each do |product|
-                = product.src
-            .pickup-list__text
-              .product-name
-                - @products.each do |product|
+        - @products.each do |product|
+          .pickup-list
+            = link_to product_path(@products.ids), class: "productdetail-link" do
+              .pickup-list__photo
+                = image_tag product.product_images[0].src.url, class:'pickupproduct-image'
+              .pickup-list__text
+                .product-name
                   = product.name
-                  -# = link_to item_path(id: item.id) ,class:
-              .product-details
-                %ul
-                  %li.price
-                    - @products.each do |product|
+                .product-details
+                  %ul
+                    %li.price
                       = product.pricing
-                      円
-                  %li.like
-                    ★0
-                .tax
-                  （税込）
+                    %li.like
+                      ★0
+                  .tax
+                    （税込）
         .pickup-list
           = link_to "/", class: "productdetail-link" do
             .pickup-list__photo

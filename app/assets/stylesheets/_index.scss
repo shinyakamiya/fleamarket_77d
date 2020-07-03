@@ -320,6 +320,30 @@
       font-weight: bold;
       text-align: center;
     }
+    .pickup-title-right{
+      a {
+        text-decoration: none;
+        float: right;
+        align-items: center;
+        color: #0095ee;
+        cursor: pointer;
+        display: inline-flex;
+        line-height: 1.4em;
+        text-decoration: none;
+        word-break: normal;
+        font-size: 20px;
+      }
+      i{
+        color: #0095ee;
+        float: right;
+        cursor: pointer;
+        display: inline-flex;
+        line-height: 1.4em;
+        text-decoration: none;
+        word-break: normal;
+        font-size: 20px;
+      }
+    }
     .pickup-products {
       &__head{
         text-align: center;

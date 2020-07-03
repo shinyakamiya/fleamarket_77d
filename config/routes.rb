@@ -4,6 +4,11 @@ Rails.application.routes.draw do
     member do
       get :purchase
     end
+    #投稿フォームのカテゴリーjsで使用(宮嶋)
+    collection do
+      get 'get_category_children', defaults: { format: 'json' }
+      get 'get_category_grandchildren', defaults: { format: 'json' }
+    end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'items#index'

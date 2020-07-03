@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.all.order(created_at: :desc)
-    @product = ProductImage.all
+    @images = ProductImage.all
   end
   def show
     @products = Product.find(1)

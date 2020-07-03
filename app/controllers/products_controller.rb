@@ -9,7 +9,6 @@ class ProductsController < ApplicationController
   end
   def show
     @products = Product.find(params[:id])
-    # @parents = Category.where(ancestry: nil)
     @prefecture = Prefecture.find(1)
     @condition = Condition.find(1)
     @preparationday = PreparationDay.find(1)

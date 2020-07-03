@@ -3,7 +3,7 @@ class Product < ApplicationRecord
   belongs_to :buyer, class_name: "User", foreign_key: "buyer_id",optional: true
   #意味：userテーブルをseller/buyerに変更、カラム名はseller_id・buyer_idで外部キーだよ
   #optional: true＝今は購入者は関係ないのでNULLデータでもDBに入る様設定している。これがないとデータがないと判断しDBに商品のレコードが残らない。
-
+  
 
   # active-hash勢アソシエーション
   extend ActiveHash::Associations::ActiveRecordExtensions

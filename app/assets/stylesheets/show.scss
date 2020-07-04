@@ -1,11 +1,11 @@
 .main-show {
   background: #f8f8f8;
-  height: 250vh;
+  height: 200vh;
   .showMain {
     padding: 40px;
     margin: 0 auto;
     &__contentRight {
-      width: 700px;
+      width: 750px;
       margin: 0 auto;
       .topContent{
         &__itemBox {
@@ -23,8 +23,8 @@
             text-align:center;
             position: relative;
             .item-image{
-              height: 280px;
-              width: 500px;
+              height: 300px;
+              width: 650px;
             }
             &__sold{
               width: 0;

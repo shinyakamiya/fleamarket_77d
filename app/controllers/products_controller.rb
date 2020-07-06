@@ -46,6 +46,9 @@ class ProductsController < ApplicationController
 
   def edit
     if @product.seller_id != current_user.id  #出品者が現ログインユーザでないと編集できない様に
+      Category.where(ancestry: nil).each do |parent|
+        @category_parent_array << parent.name
+      end
       redirect_to root_path
     end
   end

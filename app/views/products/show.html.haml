@@ -57,9 +57,9 @@
             -if (user_signed_in? && @products.buyer_id == nil)
               -if (current_user.id == @products.seller_id)
                 %button.btn
-                  = link_to "商品情報を編集",purchase_product_path(@products.id), id: "edit-btn"
+                  = link_to "商品情報を編集",edit_product_path, id: "edit-btn"
                 %button.btn
-                  = link_to '削除', method: :delete
+                  = link_to '削除',product_path, method: :delete, data: {confirm: "削除しますか？"}
               - else
                 %button.btn
                   = link_to "購入に進む" ,purchase_product_path(@products.id), method: :get      

@@ -5,17 +5,30 @@ class ProductsController < ApplicationController
   # set_productメソッド（@product = Product.find(params[:id])は編集・更新・削除のみで働く
 
   def index
+    @products = Product.all.order(created_at: :desc)
+    @images = ProductImage.all
   end
   def show
+    @products = Product.find(params[:id])
+    @prefecture = Prefecture.find(1)
+    @condition = Condition.find(1)
+    @preparationday = PreparationDay.find(1)
+    @user = User.find(1)
   end
 
   # 商品出品
   def new
     @product = Product.new
     @product.product_images.new
+    #セレクトボックスの初期値設定(宮嶋)
+    @category_parent_array = ["選択してください"]
+    Category.where(ancestry: nil).each do |parent|
+      @category_parent_array << parent.name
+    end
   end
 
   def create
+
     @product = Product.new(product_params)
     @product.seller_id = current_user.id
     if @product.save
@@ -25,6 +38,19 @@ class ProductsController < ApplicationController
       render :new
     end
   end
+
+  #親カテゴリーが選択された後のアクション(宮嶋)
+  def get_category_children
+    
+    @category_children = Category.find_by(id: "#{params[:parent_id]}").children
+  end
+  
+  def get_category_grandchildren
+    
+    @category_grandchildren = Category.find("#{params[:child_id]}").children    
+  end
+
+
 
   def edit
     if @product.seller_id != current_user.id  #出品者が現ログインユーザでないと編集できない様に

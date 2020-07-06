@@ -7,7 +7,7 @@
         = render 'layouts/error_messages', model: f.object
         %h1
           出品画像
-        %span 必須
+          %span 必須
         %br 最大10枚までアップロードできます
         #image-box
           #previews
@@ -27,16 +27,16 @@
               .js-remove 削除
         %h1
           商品名
-        %span 必須
+          %span 必須
         .form
           =f.text_field :name, placeholder: "40文字まで"
           - if @product.errors.include?(:name)
             %p= @product.errors.full_messages_for(:name).first
         %h1
           商品の説明
-        %span 必須
+          %span 必須
         .form
-          =f.text_area :description, size: "78%x7", placeholder: "商品の説明 (必須,1,000文字以内) (色、素材、重さ、定価、注意点など)   例) 2010年頃に1万円で購入したジャケットです。ライトグレーで傷はありません。合わせやすいのでおすすめです。"
+          =f.text_area :description, size: "78%x7", placeholder: "商品の説明 (必須,1,000文字以内)                                                                              (色、素材、重さ、定価、注意点など)                                                                                        例) 2010年頃に1万円で購入したジャケットです。ライトグレーで傷はありません。合わせやすいのでおすすめです。"
           - if @product.errors.include?(:description)
             %p= @product.errors.full_messages_for(:description).first
         %h2
@@ -44,40 +44,43 @@
         %h1
         カテゴリー
         %span 必須
-        .form
-          =f.collection_select :category, Category.all, :id, :name, {prompt:"選択してください"}, {class:""}
+        .form__category__select
+          = f.collection_select :category_id, Category.roots, :id, :name, {prompt: "選択してください"}, {class: 'category__select', id: 'parent_category'}
+
           - if @product.errors.include?(:category)
             %p= @product.errors.full_messages_for(:category).first
+
+
         -# %h1
         -# ブランド(任意)
         -# .form
         -#   =f.text_field :bland
         %h1
           商品状態
-        %span 必須
+          %span 必須
         .form
           =f.collection_select :condition_id, Condition.all, :id, :name, {prompt:"選択してください"}, {class:""}
-          - if @product.errors.include?(:condition)
-            %p= @product.errors.full_messages_for(:condition).first
+          -# - if @product.errors.include?(:condition)
+          -#   %p= @product.errors.full_messages_for(:condition).first
         %h2
           配送について
         %h1
           配送料の負担
-        %span 必須
+          %span 必須
         .form
           =f.collection_select :postage_id, Postage.all, :id, :name, {prompt:"選択してください"}, {class:""}
           - if @product.errors.include?(:postage)
             %p= @product.errors.full_messages_for(:postage).first
         %h1
           発送元の地域
-        %span 必須
+          %span 必須
         .form
           = f.collection_select :prefecture_id, Prefecture.all, :id, :name, {prompt:"選択してください"}, {class:""}
           - if @product.errors.include?(:prefecture)
             %p= @product.errors.full_messages_for(:prefecture).first
         %h1
           発送までの日数
-        %span 必須
+          %span 必須
         .form
           =f.collection_select :preparation_day_id, PreparationDay.all, :id, :name, {prompt:"選択してください"}, {class:""}
           - if @product.errors.include?(:preparation_day)
@@ -86,10 +89,10 @@
           価格(¥300~9,999,999)  
         %h1
           販売価格
-        %span 必須
+          %span 必須
         .form
           =icon('fas','yen-sign')
-          =f.text_field :pricing
+          =f.text_field :pricing, class: ""
           - if @product.errors.include?(:pricing)
             %p= @product.errors.full_messages_for(:pricing).first
         .action

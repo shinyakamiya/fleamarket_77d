@@ -6,8 +6,9 @@ describe Product do
       user = create(:user)
       category = create(:category)
       product = build(:product, seller_id: user.id, category_id: category.id)
-      product.product_images << build(:product_image)
-      expect().to be_valid
+      # binding.pry
+      # product.product_images << build(:product_image)
+      expect(product).to be_valid
     end
   end
 
@@ -15,7 +16,8 @@ describe Product do
       it "product_imageがない場合は保存できないこと" do
         user = create(:user)
         category = create(:category)
-        product = build(:product, seller_id: user.id, category_id: category.id)
+        product = build(:product, :no_image, seller_id: user.id, category_id: category.id)
+        binding.pry
         product.valid?
         pp product.errors
         expect(product.errors[:product_images]).to include("を入力してください")

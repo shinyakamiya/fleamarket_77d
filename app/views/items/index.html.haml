@@ -20,7 +20,7 @@
       %ul.right-lists
       - if user_signed_in?
         %li.right-lists--left
-          = link_to 'マイページ', "/users/:id", class:'btn'
+          = link_to 'マイページ', "/users/#{current_user.id}", method: :get, class:'btn'
         %li.right-lists--right
           = link_to 'ログアウト', destroy_user_session_path, method: :delete, class:'btn'
       - else

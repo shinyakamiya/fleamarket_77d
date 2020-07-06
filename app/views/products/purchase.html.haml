@@ -45,7 +45,7 @@
     %section.comment
       .comment1
         %p.eYgRch 支払方法の入力するを完了してください。
-        .comment2 購入する
+        = link_to "購入する", buy_product_purchase_path(@product_id), class: "comment2" 
   #footer
     .footer-box
       %ul

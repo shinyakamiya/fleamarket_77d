@@ -12,4 +12,5 @@ class User < ApplicationRecord
   has_one :domicile
   # 大野商品出品で追記↓
   has_many :products
+  has_many :cards
 end

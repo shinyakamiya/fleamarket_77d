@@ -1,23 +1,38 @@
 Rails.application.routes.draw do
   get 'items/index'
-  resources :products, only: [:index, :show, :new, :create]  do
-    member do
-      get :purchase
+  resources :products, only: [:index, :show, :new]  do
+    resources :purchases do
+      member do
+        get :purchase
+        get  "buy"
+        post "pay"
+      end
     end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'items#index'
   # devise_for :users
   # root 'items#index'
-  devise_for :users, controllers: { registrations: 'users/registrations'}
+  devise_for :users, controllers: { registrations: 'users/registrations' 
+  }
   devise_scope :user do
     get 'domiciles', to: 'users/registrations#new_domicile'
     post 'domiciles', to: 'users/registrations#create_domicile'
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  resources :credit_cards
   resources :users 
-  resources :cards
+  resources :cards, only: [:new, :create, :show, :destroy] do
+  end
+
+  # resources :products do
+  #   # 他の記述は省略
+  #   resource :purchases do
+  #     member do
+  #       get  "buy"
+  #       post "pay"
+  #     end
+  #   end
+  # end
   
     
   # root to: 'mypages#index'

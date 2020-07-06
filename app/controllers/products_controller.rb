@@ -69,7 +69,7 @@ class ProductsController < ApplicationController
 
   def destroy
     if @product.destroy
-      redirect_to products_path  #商品一覧画面へ移動
+      redirect_to root_path  #商品一覧画面へ移動
     else
       render :show  #商品詳細画面でやり直し
     end

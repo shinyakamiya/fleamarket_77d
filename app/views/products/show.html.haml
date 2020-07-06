@@ -75,11 +75,14 @@
                 %tr
                   %th カテゴリー
                   %td
-                    = link_to ("メンズ"),'#'
+                    //親カテゴリー
+                    = link_to "#{@category_parent.name}", "#"
                     %br/
-                    = link_to ("ジャケット/アウター"),'#'
+                    //子カテゴリー
+                    =link_to "#{@category_child.name}", "#"
                     %br/
-                    = link_to ("ノーカラージャケット"),'#'
+                    //孫カテゴリー
+                    = link_to "#{@category_grandchild.name}", "#"
                 %tr
                   %th 商品の状態
                   %td

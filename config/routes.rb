@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get 'items/index'
-  resources :products, only: [:index, :show, :new, :create, :edit, :update]  do
+  resources :products do
     member do
       get :purchase
     end
@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       get 'get_category_children', defaults: { format: 'json' }
       get 'get_category_grandchildren', defaults: { format: 'json' }
     end
+    
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'items#index'

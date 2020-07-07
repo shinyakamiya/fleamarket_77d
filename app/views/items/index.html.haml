@@ -130,71 +130,29 @@
   %section.pickupcontainer
     .pickup-title
       ピックアップカテゴリー
+    .pickup-title-right
+      %i.fas.fa-chevron-right
+      = link_to ("もっと見る"),products_path
     .pickup-products
       .pickup-products__head
         = link_to "新規投稿商品", '#', class: "pickup-link"
       .pickup-lists
-        .pickup-list
-          = link_to "/products/:id", class: "productdetail-link" do
-            .pickup-list__photo
-              = image_tag("material/products/medical_mask_urethane.png", class: "pickupproduct-image")
-            .pickup-list__text
-              .product-name
-                マスク
-              .product-details
-                %ul
-                  %li.price
-                    1000円
-                  %li.like
-                    ★0
-                .tax
-                  （税込）
-        .pickup-list
-          = link_to "/", class: "productdetail-link" do
-            .pickup-list__photo
-              = image_tag("material/products/pleats_mask_hida.png", class: "pickupproduct-image")
-            .pickup-list__text
-              .product-name
-                マスク
-              .product-details
-                %ul
-                  %li.price
-                    1000円
-                  %li.like
-                    ★0
-                .tax
-                  （税込）
-        .pickup-list
-          = link_to "/", class: "productdetail-link" do
-            .pickup-list__photo
-              = image_tag("material/products/butoukai_kamen.png", class: "pickupproduct-image")
-            .pickup-list__text
-              .product-name
-                マスク？
-              .product-details
-                %ul
-                  %li.price
-                    1000円
-                  %li.like
-                    ★0
-                .tax
-                  （税込）
-        .pickup-list
-          = link_to "/", class: "productdetail-link" do
-            .pickup-list__photo
-              = image_tag("material/products/medical_mask_n95.png", class: "pickupproduct-image")
-            .pickup-list__text
-              .product-name
-                マスク
-              .product-details
-                %ul
-                  %li.price
-                    1000円
-                  %li.like
-                    ★0
-                .tax
-                  （税込）
-
+        - @products.each do |product|
+          .pickup-list
+            = link_to product_path(product.id), class: "productdetail-link" do
+              .pickup-list__photo
+                = image_tag product.product_images[0].src.url, class:'pickupproduct-image'
+              .pickup-list__text
+                .product-name
+                  = product.name
+                .product-details
+                  %ul
+                    %li.price
+                      = product.pricing
+                    %li.like
+                      ★0
+                  .tax
+                    （税込）
   %section.pickupcontainer
     .pickup-title
       ピックアップブランド

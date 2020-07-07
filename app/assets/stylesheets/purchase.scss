@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .main{
-  height: 300vh;
+  height: 200vh;
   width: 100vw;
   box-sizing: inherit;
   background-color: #EEEEEE;
@@ -232,6 +232,19 @@
           outline: none;
           padding: 0px;
           transition: all 0.3s ease-out 0s;
+          .comment3{
+            background-color: #3CCACE;
+            width: 100%;
+            height: 50px;
+            text-align: center;
+            a {
+              text-decoration: none;
+              color: white;
+              font-size: 28px;
+              font-weight: 600;
+              height: 50px;
+            }
+          }
         }
       }
     }

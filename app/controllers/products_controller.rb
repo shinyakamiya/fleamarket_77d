@@ -15,6 +15,11 @@ class ProductsController < ApplicationController
     @user = User.find(1)
   end
 
+  def purchase
+    @products = Product.find(params[:id])
+    @address = Domicile.find(params[:id])
+  end
+
   # 商品出品
   def new
     @product = Product.new

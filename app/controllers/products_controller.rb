@@ -45,13 +45,12 @@ class ProductsController < ApplicationController
   end
 
   #親カテゴリーが選択された後のアクション(宮嶋)
-  def get_category_children
-    
+  def get_category_children  
+    # binding.pry
     @category_children = Category.find_by(id: "#{params[:parent_id]}").children
   end
   
-  def get_category_grandchildren
-    
+  def get_category_grandchildren    
     @category_grandchildren = Category.find("#{params[:child_id]}").children    
   end
 
@@ -59,8 +58,19 @@ class ProductsController < ApplicationController
 
   def edit
     if @product.seller_id != current_user.id  #出品者が現ログインユーザでないと編集できない様に
-      redirect_to root_path
-    end
+      #セレクトボックスの初期値設定(宮嶋)
+      @category_parent_array = ["選択してください"]
+      Category.where(ancestry: nil).each do |parent|
+        @category_parent_array << parent.name
+        redirect_to root_path
+
+      grandchild_category = @product.category_child
+      child_category = grandchild_category.parent
+      
+      @category_children_array = Category.where(ancestry: child_category.ancestry)
+      @category_grandchildren_array = Category.where(ancestry: grandchild_category.ancestry)
+      end
+    end  
   end
 
 

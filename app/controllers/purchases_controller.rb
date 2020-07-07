@@ -3,9 +3,9 @@ class PurchasesController < ApplicationController
   
     def buy
       # 購入する商品を引っ張ってきます。
-      @product = Product.find(params[:id])
+      @product = Product.find(params[:product_id])
       # 商品ごとに複数枚写真を登録できるので、一応全部持ってきておきます。
-      @images = @product.images.all
+      @product_images = @product.product_images.all
   
       # まずはログインしているか確認
       if user_signed_in?
@@ -56,16 +56,16 @@ class PurchasesController < ApplicationController
     def pay
       #ちなみに見やすさ考慮し、before_actionなどのリファクタリングなどはあえてしてません。
       @product = Product.find(params[:product_id])
-      @images = @product.images.all
+      @product_images = @product.product_images.all
   
       # 購入テーブル登録ずみ商品は２重で購入されないようにする
       # (２重で決済されることを防ぐ)
-      if @product.purchase.present?
+      if @product.buyer_id.present?
         redirect_to product_path(@product.id), alert: "売り切れています。"
       else
         # 同時に2人が同時に購入し、二重で購入処理がされることを防ぐための記述
         @product.with_lock do
-          if current_user.credit_card.present?
+          if current_user.card.present?
             # ログインユーザーがクレジットカード登録済みの場合の処理
             # ログインユーザーのクレジットカード情報を引っ張ってきます。
             @card = Card.find_by(user_id: current_user.id)
@@ -74,7 +74,7 @@ class PurchasesController < ApplicationController
             #登録したカードでの、クレジットカード決済処理
             charge = Payjp::Charge.create(
             # 商品(product)の値段を引っ張ってきて決済金額(amount)に入れる
-            amount: @product.price,
+            amount: @product.pricing,
             customer: Payjp::Customer.retrieve(@card.customer_id),
             currency: 'jpy'
             )
@@ -82,15 +82,16 @@ class PurchasesController < ApplicationController
             # ログインユーザーがクレジットカード登録されていない場合(Checkout機能による処理を行います)
             # APIの「Checkout」ライブラリによる決済処理の記述
             Payjp::Charge.create(
-            amount: @product.price,
+            amount: @product.pricing,
             card: params['payjp-token'], # フォームを送信すると作成・送信されてくるトークン
             currency: 'jpy'
             )
           end
-        #購入テーブルに登録処理(今回の実装では言及しませんが一応、、、)
-        @buyer = buyer.create(buyer_id: current_user.id, product_id: params[:product_id])
+          @product.update(buyer_id: current_user.id)
+          # @buyer = buyer.create(buyer_id: current_user.id, product_id: params[:product_id])
+          # buyer_id登録
         end
       end
-    end
+    end 
   end  
 

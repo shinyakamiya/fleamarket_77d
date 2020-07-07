@@ -33,7 +33,7 @@ class Product < ApplicationRecord
   
   # カテゴリーと紐付け(宮嶋)
   belongs_to :category, dependent: :destroy,optional: true
-  has_many :product_images
+  has_many :product_images, dependent: :destroy
   accepts_nested_attributes_for :product_images, allow_destroy: true
   # ↑１行追記(みやじ、product.scss new.html, product_image)
 end

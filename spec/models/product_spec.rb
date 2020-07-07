@@ -6,8 +6,6 @@ describe Product do
       user = create(:user)
       category = create(:category)
       product = build(:product, seller_id: user.id, category_id: category.id)
-      # binding.pry
-      # product.product_images << build(:product_image)
       expect(product).to be_valid
     end
   end
@@ -17,9 +15,7 @@ describe Product do
         user = create(:user)
         category = create(:category)
         product = build(:product, :no_image, seller_id: user.id, category_id: category.id)
-        binding.pry
         product.valid?
-        pp product.errors
         expect(product.errors[:product_images]).to include("を入力してください")
       end
       it "nameがない場合出品不可" do
@@ -27,7 +23,6 @@ describe Product do
         category = create(:category)
         product = build(:product, name: nil, seller_id: user.id, category_id: category.id)
         product.valid?
-        pp product.errors
         expect(product.errors[:name]).to include("を入力してください")
       end
 
@@ -36,7 +31,6 @@ describe Product do
         category = create(:category)
         product = build(:product, name: "a"* 41, seller_id: user.id, category_id: category.id)
         product.valid?
-        pp product.errors
         expect(product.errors[:name]).to include()
       end
 
@@ -45,7 +39,6 @@ describe Product do
         category = create(:category)
         product = build(:product, description: nil, seller_id: user.id, category_id: category.id)
         product.valid?
-        pp product.errors
         expect(product.errors[:description]).to include("を入力してください")
       end
 
@@ -54,7 +47,6 @@ describe Product do
         category = create(:category)
         product = build(:product, description: "a"*1001, seller_id: user.id, category_id: category.id)
         product.valid?
-        pp product.errors
         expect(product.errors[:description]).to include()
       end
 
@@ -63,7 +55,6 @@ describe Product do
         category = create(:category)
         product = build(:product, condition_id: nil, seller_id: user.id, category_id: category.id)
         product.valid?
-        pp product.errors
         expect(product.errors[:condition]).to include("を入力してください")
       end
 
@@ -72,7 +63,6 @@ describe Product do
         category = create(:category)
         product = build(:product, postage_id: nil, seller_id: user.id, category_id: category.id)
         product.valid?
-        pp product.errors
         expect(product.errors[:postage]).to include("を入力してください")
       end
 
@@ -81,7 +71,6 @@ describe Product do
         category = create(:category)
         product = build(:product, prefecture_id: nil, seller_id: user.id, category_id: category.id)
         product.valid?
-        pp product.errors
         expect(product.errors[:prefecture]).to include("を入力してください")
       end
 
@@ -90,7 +79,6 @@ describe Product do
         category = create(:category)
         product = build(:product, preparation_day_id: nil, seller_id: user.id, category_id: category.id)
         product.valid?
-        pp product.errors
         expect(product.errors[:preparation_day]).to include("を入力してください")
       end
 
@@ -99,7 +87,6 @@ describe Product do
         category = create(:category)
         product = build(:product, pricing: nil, seller_id: user.id, category_id: category.id)
         product.valid?
-        pp product.errors
         expect(product.errors[:pricing]).to include("を入力してください")
       end
 
@@ -108,7 +95,6 @@ describe Product do
         category = create(:category)
         product = build(:product, pricing: 300, seller_id: user.id, category_id: category.id)
         product.valid?
-        pp product.errors
         expect(product.errors[:pricing]).to include()
       end
 
@@ -117,7 +103,6 @@ describe Product do
         category = create(:category)
         product = build(:product, pricing: 10000000, seller_id: user.id, category_id: category.id)
         product.valid?
-        pp product.errors
         expect(product.errors[:pricing]).to include()
       end
 
@@ -126,7 +111,6 @@ describe Product do
         category = create(:category)
         product = build(:product, seller: nil, category_id: category.id)
         product.valid?
-        pp product.errors
         expect(product.errors[:seller]).to include("を入力してください")
       end
 
@@ -135,7 +119,6 @@ describe Product do
         category = create(:category)
         product = build(:product, category: nil, seller_id: user.id)
         product.valid?
-        pp product.errors
         expect(product.errors[:category]).to include("を入力してください")
       end
     end

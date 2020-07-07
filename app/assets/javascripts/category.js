@@ -28,7 +28,7 @@ $(document).on('turbolinks:load', ()=> {
       var parentCategory = document.getElementById('parent_category').value; 
       if (parentCategory != "選択してください"){ 
         $.ajax({
-          url: 'get_category_children',
+          url: '/products/get_category_children',
           type: 'GET',
           data: { parent_id: parentCategory },
           dataType: 'json'
@@ -57,7 +57,7 @@ $(document).on('turbolinks:load', ()=> {
       var childId = $('#children_wrapper option:selected').data('category'); 
       if (childId != "選択してください"){ 
         $.ajax({
-          url: 'get_category_grandchildren',
+          url: '/products/get_category_grandchildren',
           type: 'GET',
           data: { child_id: childId },
           dataType: 'json'

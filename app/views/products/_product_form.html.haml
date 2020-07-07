@@ -45,8 +45,9 @@
         カテゴリー
         %span 必須
         .form__category__select
-          = f.collection_select :category_id, Category.roots, :id, :name, {prompt: "選択してください"}, {class: 'category__select', id: 'parent_category'}
-
+          = f.collection_select :category_id, Category.roots, :id, :name, {prompt: "選択してください",selected: @product.category&.root_id}, {class: 'category__select', id: 'parent_category'}
+         
+          
           - if @product.errors.include?(:category)
             %p= @product.errors.full_messages_for(:category).first
 
@@ -78,6 +79,7 @@
           = f.collection_select :prefecture_id, Prefecture.all, :id, :name, {prompt:"選択してください"}, {class:""}
           - if @product.errors.include?(:prefecture)
             %p= @product.errors.full_messages_for(:prefecture).first
+          
         %h1
           発送までの日数
           %span 必須

@@ -1,1 +1,123 @@
-= render partial: "products/product_form"
+.exhibition__page
+  .exhibition__page__header
+    = image_tag ('material/logo/logo.png'), class: "logo"
+  .exhibition__page__box
+    = form_for @product do |f|
+      .exhibition__page__box__in
+        = render 'layouts/error_messages', model: f.object
+        %h1
+          出品画像
+          %span 必須
+        %br 最大10枚までアップロードできます
+        #image-box
+          #previews
+            - if @product.persisted?
+              - @product.product_images.each_with_index do |image, i|
+                = image_tag image.src.url, data: { index: i }, width: "100", height: '100'
+          = f.fields_for :product_images do |image|
+            .js-file_group{"data-index" => image.index}
+              = image.file_field :src, class: 'js-file'
+              %br/
+              .js-remove 削除
+            - if @product.persisted?
+              = image.check_box :_destroy, data:{ index: image.index }, class: 'hidden-destroy'
+          - if @product.persisted?
+            .js-file_group{"data-index" => @product.product_images.count}
+              = file_field_tag :src, name: "product[product_images_attributes][#{@product.product_images.count}][src]", class: 'js-file'
+              .js-remove 削除
+        %h1
+          商品名
+          %span 必須
+        .form
+          =f.text_field :name, placeholder: "40文字まで"
+          - if @product.errors.include?(:name)
+            %p= @product.errors.full_messages_for(:name).first
+        %h1
+          商品の説明
+          %span 必須
+        .form
+          =f.text_area :description, size: "78%x7", placeholder: "商品の説明 (必須,1,000文字以内)                                                                              (色、素材、重さ、定価、注意点など)                                                                                        例) 2010年頃に1万円で購入したジャケットです。ライトグレーで傷はありません。合わせやすいのでおすすめです。"
+          - if @product.errors.include?(:description)
+            %p= @product.errors.full_messages_for(:description).first
+        %h2
+          商品の詳細
+        %h1
+        カテゴリー
+        %span 必須
+        .form__category__select
+          -# = f.collection_select :category_id, Category.roots, :id, :name, {prompt: "選択してください",selected: @product.category&.root_id}, {class: 'category__select', id: 'parent_category'}
+
+          = f.collection_select :category_id, Category.roots, :id, :name, {include_blank: "---",selected: @product.category&.root_id}, required: true,class:'category__select', id: 'parent_category'
+
+        .category-wrapper-select#children_wrapper
+          .category-wrapper-select__box
+          = f.collection_select :category_id, @product.category.parent.siblings, :id, :name, {include_blank: "---",selected: @product.category.parent_id}, required: true,class:'category__select', id: 'child_category'
+        
+        .category-wrapper-select#grandchildren_wrapper
+          .category-wrapper-select__box
+          = f.collection_select :category_id, @product.category.siblings, :id, :name, {include_blank: "---",selected: @product.category.id}, required: true, class: 'category__select' ,id: 'grandchild_category'
+          
+          - if @product.errors.include?(:category)
+            %p= @product.errors.full_messages_for(:category).first
+
+
+        -# %h1
+        -# ブランド(任意)
+        -# .form
+        -#   =f.text_field :bland
+        %h1
+          商品状態
+          %span 必須
+        .form
+          =f.collection_select :condition_id, Condition.all, :id, :name, {prompt:"選択してください"}, {class:""}
+          -# - if @product.errors.include?(:condition)
+          -#   %p= @product.errors.full_messages_for(:condition).first
+        %h2
+          配送について
+        %h1
+          配送料の負担
+          %span 必須
+        .form
+          =f.collection_select :postage_id, Postage.all, :id, :name, {prompt:"選択してください"}, {class:""}
+          - if @product.errors.include?(:postage)
+            %p= @product.errors.full_messages_for(:postage).first
+        %h1
+          発送元の地域
+          %span 必須
+        .form
+          = f.collection_select :prefecture_id, Prefecture.all, :id, :name, {prompt:"選択してください"}, {class:""}
+          - if @product.errors.include?(:prefecture)
+            %p= @product.errors.full_messages_for(:prefecture).first
+          
+        %h1
+          発送までの日数
+          %span 必須
+        .form
+          =f.collection_select :preparation_day_id, PreparationDay.all, :id, :name, {prompt:"選択してください"}, {class:""}
+          - if @product.errors.include?(:preparation_day)
+            %p= @product.errors.full_messages_for(:preparation_day).first
+        %h2
+          価格(¥300~9,999,999)  
+        %h1
+          販売価格
+          %span 必須
+        .form
+          =icon('fas','yen-sign')
+          =f.text_field :pricing, class: ""
+          - if @product.errors.include?(:pricing)
+            %p= @product.errors.full_messages_for(:pricing).first
+        .action
+          =f.submit "出品する"
+  .newFooter
+    .footercontents
+      %ul.footerlists
+        %li.footerlists__list
+          = link_to "プライバシーポリシー","#", class: "footer-link"
+        %li.footerlists__list
+          = link_to "FURIMA利用規約","#", class: "footer-link"
+        %li.footerlists__list
+          = link_to "特定商取引に関する表記","#", class: "footer-link"
+    .footerLogo
+      = link_to image_tag("material/logo/logo-white.png", class: "footer-logo"), root_path
+    .footerLogo-text
+      © FURIMA

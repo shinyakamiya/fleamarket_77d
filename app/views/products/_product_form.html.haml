@@ -1,6 +1,6 @@
 .exhibition__page
   .exhibition__page__header
-    = image_tag ('material/logo/logo.png'), class: "logo"
+    = link_to image_tag('material/logo/logo.png', class: "logo"), "/"
   .exhibition__page__box
     = form_for @product do |f|
       .exhibition__page__box__in

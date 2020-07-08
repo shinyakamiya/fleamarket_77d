@@ -1,6 +1,6 @@
 .exhibition__page
   .exhibition__page__header
-    = image_tag ('material/logo/logo.png'), class: "logo"
+    = link_to image_tag('material/logo/logo.png', class: "logo"), "/"
   .exhibition__page__box
     = form_for @product do |f|
       .exhibition__page__box__in
@@ -45,8 +45,6 @@
         カテゴリー
         %span 必須
         .form__category__select
-          -# = f.collection_select :category_id, Category.roots, :id, :name, {prompt: "選択してください",selected: @product.category&.root_id}, {class: 'category__select', id: 'parent_category'}
-
           = f.collection_select :category_id, Category.roots, :id, :name, {include_blank: "---",selected: @product.category&.root_id}, required: true,class:'category__select', id: 'parent_category'
 
         .category-wrapper-select#children_wrapper

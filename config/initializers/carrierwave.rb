@@ -14,7 +14,7 @@ CarrierWave.configure do |config|
       aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
       region: "ap-northeast-1"
     }
-    config.fog_directory  = 'chatspace600708'
-    config.asset_host = 'https://s3-ap-northeast-1.amazonaws.com/chatspace600708'
+    config.fog_directory  = 'fleamarket77d'
+    config.asset_host = 'https://s3-ap-northeast-1.amazonaws.com/fleamarket77d'
   end
 end

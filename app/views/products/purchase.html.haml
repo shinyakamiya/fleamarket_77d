@@ -55,7 +55,7 @@
         .comment2 
           - if (current_user.card)
             .comment3
-              =link_to "購入する", credit_card_path(@products.id), method: :post 
+              =link_to "購入する", buy_product_purchases_path(@products.id), method: :GET
           - else 
             決済方法を登録してください  
   #footer

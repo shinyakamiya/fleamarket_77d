@@ -1,4 +1,4 @@
-= form_with url:cards_path, method: :post, html: { name: "inputForm" },class:"form" do |f|
+= form_with url:cards_path, method: :post, html: { name: "inputForm" },class:"form" ,id:"charge-form" do |f|
   .credit-card-head
     クレジットカード情報入力
   .credit-card-body
@@ -8,7 +8,7 @@
           カード番号
         .credit-card-body__form-group__top__required
           必須
-      %input.credit-card-body__form-group__input{ type: 'text', placeholder: '半角数字のみ', maxlength: '19' }
+      %input.credit-card-body__form-group__input{ type: 'text', id: "payment_card_no", placeholder: '半角数字のみ', maxlength: '19' }
       %ul.credit-card-body__form-group__list
         %li
           = image_tag '//pcweb-assets.mercdn.net/assets/img/card/visa.svg?2246739708', width: '49', height: '20' 
@@ -32,10 +32,10 @@
           必須
       .credit-card-body__form-group__expire__deta
         .credit-card-body__form-group__expire__half
-          = f.select :exp_month, [["01",1],["02",2],["03",3],["04",4],["05",5],["06",6],["07",7],["08",8],["09",9],["10",10],["11",11],["12",12]],{} , class: 'form-signup__month__select', id:'exp_month'
+          = f.select :exp_month, [["01",1],["02",2],["03",3],["04",4],["05",5],["06",6],["07",7],["08",8],["09",9],["10",10],["11",11],["12",12]],{} , class: 'form-signup__month__select', id:'payment_card_month'
           %span.month-year 月
         .credit-card-body__form-group__expire__year
-          = f.select :exp_year, [["19",2019],["20",2020],["21",2021],["22",2022],["23",2023],["24",2024],["25",2025],["26",2026],["27",2027],["28",2028],["29",2029]],{} , class: 'form-signup__month__select', id:'exp_year'
+          = f.select :exp_year, [["20",2020],["21",2021],["22",2022],["23",2023],["24",2024],["25",2025],["26",2026],["27",2027],["28",2028],["29",2029]],{} , class: 'form-signup__month__select', id:'payment_card_year'
           %span.month-year 年
     .credit-card-body__form-group__sekyuriti
       .credit-card-body__form-group__sekyuriti__top
@@ -43,8 +43,8 @@
           セキュリティコード
         .credit-card-body__form-group__sekyuriti__top__required
           必須
-      %input.credit-card-body__form-group__sekyuriti__form{ type: 'text', id: 'cvc', placeholder: 'カード背面4桁もしくは3桁の番号' }
+      %input.credit-card-body__form-group__sekyuriti__form{ type: 'text', id: 'payment_card_cvc', placeholder: 'カード背面4桁もしくは3桁の番号' }
       .credit-card-body__form-group__sekyuriti__text
         カード裏面の番号とは？
     .credit-card-body__form-group__card-token
-      = submit_tag "登録する" ,id: "token_submit", class: "top__margin"
+      = submit_tag "登録する" ,id: "payment_card_submit-button", class: "top__margin"

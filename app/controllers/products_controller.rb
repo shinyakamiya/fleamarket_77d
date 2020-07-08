@@ -23,7 +23,7 @@ class ProductsController < ApplicationController
 
   def purchase
     @products = Product.find(params[:id])
-    @address = Domicile.find(params[:id])
+    @address = Domicile.find_by(user_id: current_user.id)
   end
 
   # 商品出品

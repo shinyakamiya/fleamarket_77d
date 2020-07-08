@@ -1,4 +1,4 @@
 .mypage-content
   .mypage-content__inner
     .mypage-content__inner__content
-      =link_to "ログアウト", "#", class: 'mypage-content__inner__content__btn-default'
+      =link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'mypage-content__inner__content__btn-default'

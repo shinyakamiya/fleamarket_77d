@@ -75,12 +75,10 @@ group :production do
 end
 gem 'devise'
 gem 'jquery-rails'
-gem 'pry-rails'
 gem 'payjp'
 gem 'font-awesome-sass', '~> 5.4.1'
 gem 'active_hash'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'ancestry'
-gem 'carrierwave'
 gem 'fog-aws'

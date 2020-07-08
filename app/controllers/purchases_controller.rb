@@ -1,9 +1,10 @@
 class PurchasesController < ApplicationController
+  before_action :set_product, only: [:buy, :pay]
     require "payjp"
   
     def buy
       # 購入する商品を引っ張ってきます。
-      @product = Product.find(params[:product_id])
+      # @product = Product.find(params[:product_id])
       # 商品ごとに複数枚写真を登録できるので、一応全部持ってきておきます。
       @product_images = @product.product_images.all
   
@@ -55,7 +56,7 @@ class PurchasesController < ApplicationController
   
     def pay
       #ちなみに見やすさ考慮し、before_actionなどのリファクタリングなどはあえてしてません。
-      @product = Product.find(params[:product_id])
+      # @product = Product.find(params[:product_id])
       @product_images = @product.product_images.all
   
       # 購入テーブル登録ずみ商品は２重で購入されないようにする
@@ -93,5 +94,11 @@ class PurchasesController < ApplicationController
         end
       end
     end 
+
+    private
+
+    def set_product
+      @product = Product.find(params[:product_id])
+    end
   end  
 

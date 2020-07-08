@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  # ログインしてないとindexとshow以外はアクセス不可。出品・編集などができない様にする　users.rbにも記載したので見て
+  # ログインしてないとindexとshow以外はアクセス不可。出品・編集などができない様にするusers.rbにも記載したので見て
   before_action :set_product, only: [:edit, :update, :destroy]
   # set_productメソッド（@product = Product.find(params[:id])は編集・更新・削除のみで働く
 

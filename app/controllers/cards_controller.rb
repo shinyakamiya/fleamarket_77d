@@ -1,4 +1,5 @@
 class CardsController < ApplicationController
+  bofore_action :set_cards, only: [:show, :destroy,]
   require "payjp" 
 
   def new
@@ -26,17 +27,12 @@ class CardsController < ApplicationController
   end
 
   def show
-    # ログイン中のユーザーのクレジットカード登録の有無を判断
-    @card = Card.find_by(user_id: current_user.id)
+    # @card = Card.find_by(user_id: current_user.id)
     if @card.blank?
-      # 未登録なら新規登録画面に
       redirect_to action: "new" 
     else
-      # 前前回credentials.yml.encに記載したAPI秘密鍵を呼び出します。
       Payjp.api_key = Rails.application.credentials.dig(:payjp, :PAYJP_SECRET_KEY)
-      # ログインユーザーのクレジットカード情報からPay.jpに登録されているカスタマー情報を引き出す
       customer = Payjp::Customer.retrieve(@card.customer_id)
-      # カスタマー情報からカードの情報を引き出す
       @customer_card = customer.cards.retrieve(@card.card_id)
     end
       #  viewの記述を簡略化
@@ -48,10 +44,8 @@ class CardsController < ApplicationController
   end
 
   def destroy
-    # ログイン中のユーザーのクレジットカード登録の有無を判断
-    @card = Card.find_by(user_id: current_user.id)
+    # @card = Card.find_by(user_id: current_user.id)
     if @card.blank?
-      # 未登録なら新規登録画面に
       redirect_to action: "new"
     else
       @card.destroy
@@ -72,5 +66,11 @@ class CardsController < ApplicationController
       #   redirect_to card_path(current_user.id), alert: "削除できませんでした。"
       # end
     end
+  end
+
+  private
+
+  def set_card
+     @card = Card_by.find_by(params[:id])
   end
 end

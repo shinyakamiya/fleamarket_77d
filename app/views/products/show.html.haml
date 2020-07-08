@@ -62,7 +62,8 @@
                   = link_to '削除',product_path, method: :delete, data: {confirm: "削除しますか？"}
               - else
                 %button.btn
-                  = link_to "購入に進む" ,purchase_product_path(@products.id), method: :get      
+                  = link_to "購入に進む" ,purchase_product_path(@products.id), method: :get  
+                    
           .itemDetail
             = @products.description
           .table

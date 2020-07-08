@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  # ログインしてないとindexとshow以外はアクセス不可。出品・編集などができない様にする　users.rbにも記載したので見て
+  # ログインしてないとindexとshow以外はアクセス不可。出品・編集などができない様にするusers.rbにも記載したので見て
   before_action :set_product, only: [:edit, :update, :destroy]
   # set_productメソッド（@product = Product.find(params[:id])は編集・更新・削除のみで働く
 
@@ -10,20 +10,21 @@ class ProductsController < ApplicationController
   end
   def show
     @products = Product.find(params[:id])
-    @prefecture = Prefecture.find(1)
+    @prefecture = Prefecture.find(@products.condition_id)
     @condition = Condition.find(1)
     @preparationday = PreparationDay.find(1)
-    @user = User.find(1)
     #category表示(宮嶋)
     @category_id = @products.category_id
     @category_parent = Category.find(@category_id).parent.parent
     @category_child = Category.find(@category_id).parent
     @category_grandchild = Category.find(@category_id)
+    @user = User.find(@products.seller_id)
+    
   end
 
   def purchase
     @products = Product.find(params[:id])
-    @address = Domicile.find(params[:id])
+    @address = Domicile.find_by(user_id: current_user.id)
   end
 
   # 商品出品

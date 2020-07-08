@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   # 非ログインユーザーのアクセス制限　説明はproduct.rb上部を見て
 
   def show
-    # @user = User.find(params[:id])
+     @user = User.find(params[:id])
   end
 
   def destroy

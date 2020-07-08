@@ -20,7 +20,7 @@
       %ul.right-lists
       - if user_signed_in?
         %li.right-lists--left
-          = link_to 'マイページ', "/users/:id", class:'btn'
+          = link_to 'マイページ', user_path(current_user.id), class:'btn'
         %li.right-lists--right
           = link_to 'ログアウト', destroy_user_session_path, method: :delete, class:'btn'
       - else
@@ -138,21 +138,41 @@
         = link_to "新規投稿商品", '#', class: "pickup-link"
       .pickup-lists
         - @products.each do |product|
-          .pickup-list
-            = link_to product_path(product.id), class: "productdetail-link" do
-              .pickup-list__photo
-                = image_tag product.product_images[0].src.url, class:'pickupproduct-image'
-              .pickup-list__text
-                .product-name
-                  = product.name
-                .product-details
-                  %ul
-                    %li.price
-                      = product.pricing
-                    %li.like
-                      ★0
-                  .tax
-                    （税込）
+          -if (product.buyer_id)
+            .pickup-list
+              = link_to product_path(product.id), class: "productdetail-link" do
+                .pickup-list__photo
+                  = image_tag product.product_images[0].src.url, class:'pickupproduct-image'
+                  -if product.buyer_id.present?
+                    .pickup-lists__sold
+                      .pickup-lists__sold__inner SOLD
+                .pickup-list__text
+                  .product-name
+                    = product.name
+                  .product-details
+                    %ul
+                      %li.price
+                        = product.pricing
+                      %li.like
+                        ★0
+                    .tax
+                      （税込）
+          - else   
+            .pickup-list
+              = link_to product_path(product.id), class: "productdetail-link" do
+                .pickup-list__photo
+                  = image_tag product.product_images[0].src.url, class:'pickupproduct-image'
+                .pickup-list__text
+                  .product-name
+                    = product.name
+                  .product-details
+                    %ul
+                      %li.price
+                        = product.pricing
+                      %li.like
+                        ★0
+                    .tax
+                      （税込）
   %section.pickupcontainer
     .pickup-title
       ピックアップブランド

@@ -14,6 +14,7 @@ class User < ApplicationRecord
 
   # 大野商品出品で追記↓
   has_many :products
+  has_many :cards
 
   # 販売中(sellerが自分で、buyer_id無い時)
   has_many :selling_products, -> { where("buyer_id is NULL") }, foreign_key: "seller_id", class_name: "Product"

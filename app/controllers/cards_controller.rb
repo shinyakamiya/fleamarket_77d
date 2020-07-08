@@ -1,6 +1,6 @@
 class CardsController < ApplicationController
-  bofore_action :set_cards, only: [:show, :destroy,]
   require "payjp" 
+  before_action :set_card, only: [:show, :destroy]
 
   def new
     @card = Card.where(user_id: current_user.id)
@@ -35,12 +35,6 @@ class CardsController < ApplicationController
       customer = Payjp::Customer.retrieve(@card.customer_id)
       @customer_card = customer.cards.retrieve(@card.card_id)
     end
-      #  viewの記述を簡略化
-      ## 有効期限'月'を定義
-    #   @exp_month = @customer_card.exp_month.to_s
-    #   ## 有効期限'年'を定義
-    #   @exp_year = @customer_card.exp_year.to_s.slice(2,3)
-    # end
   end
 
   def destroy
@@ -52,17 +46,12 @@ class CardsController < ApplicationController
       redirect_to card_path
       # 前前回credentials.yml.encに記載したAPI秘密鍵を呼び出します。
       # Payjp.api_key = Rails.application.credentials.dig(:payjp, :PAYJP_SECRET_KEY)
-      # # ログインユーザーのクレジットカード情報からPay.jpに登録されているカスタマー情報を引き出す
       # customer = Payjp::Customer.retrieve(@card.customer_id)
-      # # そのカスタマー情報を消す
       # customer.delete
       # # destroy!
-      # # 削除が完了しているか判断
       # if @card.destroy
-      # # # 削除完了していればdestroyのビューに移行
-      # # # destroyビューを作るのが面倒であれば、flashメッセージを入れてトップページやマイページに飛ばしてもOK
+      
       # else
-      #   # 削除されなかった場合flashメッセージを表示させて、showのビューに移行
       #   redirect_to card_path(current_user.id), alert: "削除できませんでした。"
       # end
     end
@@ -71,6 +60,6 @@ class CardsController < ApplicationController
   private
 
   def set_card
-     @card = Card_by.find_by(params[:id])
+    @card = Card.find_by(user_id: current_user.id)
   end
 end

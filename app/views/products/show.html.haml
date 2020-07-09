@@ -20,7 +20,7 @@
       %ul.right-lists
       - if user_signed_in?
         %li.right-lists--left
-          = link_to 'マイページ', '#', class:'btn'
+          = link_to 'マイページ', user_path(current_user.id), class:'btn'
         %li.right-lists--right
           = link_to 'ログアウト', destroy_user_session_path, method: :delete, class:'btn'
       - else
@@ -79,16 +79,20 @@
                     = @user.nickname
                 %tr
                   %th カテゴリー
-                  %td
-                    //親カテゴリー
-                    = link_to "#{@category_parent.name}", "#"
-                    %br/
-                    //子カテゴリー
-                    =link_to "#{@category_child.name}", "#"
-                    %br/
-                    //孫カテゴリー
-                    - if @category_grandchild.present? 
-                      = link_to "#{@category_grandchild.name}", "#"
+                  %td.category
+                    //ルートカテゴリーだけ
+                    -if @category.depth == 0 
+                      = link_to "#{@category.name}", "#", class: "rootname"
+                      //ルート、親だけ  
+                    - elsif @category.depth == 1 #parent
+                      = link_to "#{@category.parent.name}" , "#", class: "rootname"
+                      = link_to "#{@category.name}", "#", class: "parentname"
+                      //ルート、親、子まで  
+                    - elsif @category.depth == 2 # child
+                      = link_to "#{@category.root.name}", "#", class: "rootname"
+                      = link_to "#{@category.parent.name}", "#", class: "parentname"
+                      = link_to "#{@category.name}", "#", class: "childname"
+
                 %tr
                   %th 商品の状態
                   %td

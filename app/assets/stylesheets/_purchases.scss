@@ -1,0 +1,175 @@
+.buy {
+  background-color: #EEEEEE;
+  height: 100vh;
+  width: 100VW;
+  .header__blank {
+    height: 50px;
+    width: 100%;
+    background-color: #EEEEEE;
+  }  
+  .main_contents {
+    background-color: white;
+    height: 550px;
+    width: 600px;
+    margin: 0 auto;        
+    .purchase_registration {      
+      &__header {
+        height: 30px;
+        padding-top: 30px;
+        text-align: center;
+        .h7 {
+          text-align: center;
+          font-weight: bold;
+          font-size: large;
+        }
+      }      
+      &__main {
+        margin-top: 30px;
+        height: 150px;
+        width: 100%;
+         &__box {
+           border: 1px solid #3CCACE;
+           height: 100%;
+           width: 60%;
+           margin: 0 auto;
+           border-radius: 20px;
+           text-align: center;
+           line-height: 75px;
+         }
+         &__price {
+           height: 50px;
+           width: 80%;
+           margin: 0 auto;
+           padding-top: 20px;
+           border-bottom: 2px black solid;
+           display: flex;
+           justify-content: space-around;
+           
+           .amount {
+             .h7 {
+              font-weight: bold;
+             }
+           }
+         }
+        &__card {
+          height: 100px;
+          width: 100%;
+          margin-top: 30px;
+          display: flex;
+          flex-direction: row;
+          padding-left: 70px;
+          &__title {
+            line-height: 100px;
+          }
+          &__info {
+            border: 1px solid #3CCACE;
+            height: 100%;
+            width: 50%;
+            border-radius: 20px;
+            margin-left: 30px;
+            display: flex;
+            flex-direction: row;
+            &__left {
+              height: 100%;
+              width: 40%;
+              text-align: center;
+              line-height: 100px;
+            }
+            &__right {
+              height: 100%;
+              width: 60%;
+              padding-top: 20px;
+              .number {
+              }
+              .expiration_date {
+              }
+            }
+          }
+        } 
+        &__btn {
+          height: 50px;
+          width: 100%;
+          text-align: center;
+          margin-top: 40px;
+          .card_btn {
+            text-decoration: none;
+            border: 1px solid #3CCACE;
+            background-color: #3CCACE;
+            padding: 20px 30px;
+            border-radius: 20px;
+            color: white;
+          }
+        }
+      }
+    }
+  }
+}
+.pay {
+  height: 100vh;
+  width: 100vw;
+  background-color: #EEEEEE;
+  .header__blank {
+    height: 50px;
+    width: 100%;
+    background-color: #EEEEEE;
+  }
+  .main_contents {
+    height: 550px;
+    width: 600px;
+    background-color: white;
+    margin: 0 auto;
+    &__message {
+      font-weight: bold;
+      text-align: center;
+      padding-top: 30px;
+      font-size: large;
+    }
+    &__info {
+      height: 150px;
+      width: 100%;
+      margin-top: 90px;
+      text-align: center;
+      &__title {
+        height: 20px;
+        line-height: 20px;
+        margin-bottom: 10px;
+      }
+      &__box {
+        border: 1px solid #3CCACE;
+        height: 100%;
+        width: 50%;
+        border-radius: 20px;
+        margin: 0 auto;
+        text-align: center;
+        line-height: 75px;
+      }
+    }
+    &__btn {
+      height: 100px;
+      margin-top: 150px;
+      .purchased__links {
+        display: flex;
+        justify-content: space-around;
+        list-style: none;
+        .top_btn {
+          text-decoration: none;
+          border: 1px solid #3CCACE;
+          background-color: #3CCACE;
+          padding: 20px 30px;
+          border-radius: 20px;
+          color: white;
+        }
+        .index_btn {
+          text-decoration: none;
+          border: 1px solid #3CCACE;
+          background-color: #3CCACE;
+          padding: 20px 45px;
+          border-radius: 20px;
+          color: white;
+          margin-right: 40px;
+        }
+      }
+    }  
+  }
+}
+

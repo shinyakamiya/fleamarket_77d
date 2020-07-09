@@ -1,10 +1,20 @@
 .pay
+  .header__blank
   .main_contents
-    .main_details
-      .main_details__message
-        購入が完了しました。
-    %ul.purchased__links
-      %li.purchased__links__TopPage
-        = link_to "トップページに戻る", root_path, class: "purchased__links__TopPage__btn"
-      %li.purchased__links__index
-        = link_to "購入商品一覧", "#", class: "purchased__links__index__btn"
+    .main_contents__message
+      %h7
+        購入が完了しました
+    .main_contents__info
+      .main_contents__info__title
+        購入内容の確認
+      .main_contents__info__box
+        .product_name
+          = @product.name
+        .product_pricing
+          = "#{@product.pricing}" + "円"
+    //product_imagesから引用必要あり     
+    -# = render "purchases/shared/purchase_product_info.html.haml", product: @product, images: @images
+    .main_contents__btn
+      %ul.purchased__links
+        %li.purchased__links__top
+          = link_to "トップページに戻る", root_path, class: "top_btn"

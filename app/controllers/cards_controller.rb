@@ -35,6 +35,10 @@ class CardsController < ApplicationController
       customer = Payjp::Customer.retrieve(@card.customer_id)
       @customer_card = customer.cards.retrieve(@card.card_id)
     end
+    ## 有効期限'月'を定義
+    # @exp_month = @customer_card.exp_month.to_s
+    ## 有効期限'年'を定義
+    # @exp_year = @customer_card.exp_year.to_s.slice(2,3)
   end
 
   def destroy

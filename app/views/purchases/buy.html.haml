@@ -1,32 +1,45 @@
 .buy
+  .header__blank
   .main_contents
+    //product_imagesから引用必要あり  
     -# .main_details
       -# = render "purchases/shared/purchase_product_info.html.haml", product: @product, product_images: @product_images
     .purchase_registration
-      .purchase_registration_main
-        .payment
-          支払い金額   
-        .amount
-          = @product.name
-          = "#{@product.pricing}" + "円"
-      - if @user.card.present?
-        .purchase_function
-          .credit_card_info_title
-            クレジットカード情報
-            .credit_card_info
-              .credit_card_info__brand
-                -# = image_tag "cards/#{@card_src}", class: "credit_card_info__brand__img", alt: @card_brand
-              .credit_card_info__numbers
-                .number
-                  = "**** **** **** " + @customer_card.last4
-                .expiration_date
-                  .expiration_date__title
-                    有効期限
-                  .expiration_date__info
-                    = @exp_month + " / " + @exp_year
-          .purchase_function__btn
-            = link_to "登録クレジットカードで購入する", pay_product_purchases_path(product_id: @product.id), method: :post, class: "btn"
-      - else 
-        .purchase_none_btn
-          = form_tag(action: :pay, method: :post) do
-            %script.payjp-button{src: "https://checkout.pay.jp", type: "text/javascript" ,"data-text": "購入する" ,"data-key": "pk_test_(ご自身のAPI公開鍵)",}
+      .purchase_registration__header
+        %h7
+          購入内容の確認
+      .purchase_registration__main
+        .purchase_registration__main__box
+          .product_name
+            = @product.name
+          .product_pricing
+            = "#{@product.pricing}" + "円"
+        .purchase_registration__main__price
+          .payment
+            支払い金額   
+          .amount
+            %h7            
+            = "#{@product.pricing}" + "円"
+        // カード登録、未登録の設定の可否によりif文は不要(51行目)
+        -# - if @user.card.present?
+        .purchase_registration__main__card
+          .purchase_registration__main__card__title
+            %h7
+              クレジットカード情報
+          .purchase_registration__main__card__info
+            .purchase_registration__main__card__info__left
+              -# 画像
+              -# = image_tag "cards/#{@card_src}", class: "credit_card_info__brand__img", alt: @card_brand
+            .purchase_registration__main__card__info__right
+              .number
+                = "**** **** **** " + @customer_card.last4
+              .expiration_date
+                有効期限
+                = @exp_month + " / " + @exp_year
+        .purchase_registration__main__btn
+          = link_to "登録クレジットカードで購入する",pay_product_purchases_path(product_id: @product.id), method: :post, class: "card_btn"
+        // カード未登録時の設定(31行目)   
+        -# - else 
+          -# .purchase_none_btn
+          -#   = form_tag(action: :pay, method: :post) do
+          -#     %script.payjp-button{src: "https://checkout.pay.jp", type: "text/javascript" ,"data-text": "購入する" ,"data-key": "pk_test_(ご自身のAPI公開鍵)",}

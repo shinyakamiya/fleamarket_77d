@@ -1,26 +1,31 @@
 .show
+  .show__header_blank
   .show__frame
     .show__frame__title
       登録クレジットカード情報
-    .credit_card__list
-      .credit_card__list__title
+    .show__frame__list
+      .show__frame__list__title
         クレジットカード一覧
-      .credit_card__list__frame
-        .credit_card_info
-          .credit_card_info__brand
-            -# = image_tag "cards/#{@card_src}", class: "credit_card_info__brand__img", alt: @card_brand
-          .credit_card_info__numbers
-            .number
-              -#  = "**** **** **** " + @customer_card.last4
-            .expiration_date
-              .expiration_date__title
-                有効期限
-              .expiration_date__info
-                -# = @exp_month + " / " + @exp_year
+      .show__frame__list__info
+        .show__frame__list__info__box
+          .show__frame__list__info__box__left
+            .card_brand
+              -# 画像
+              -# = image_tag "cards/#{@card_src}", class: "credit_card_info__brand__img", alt: @card_brand
+          .show__frame__list__info__box__right    
+            .card_numbers
+              .number
+                -# **** **** ****
+                = "**** **** **** " + @customer_card.last4
+              -# .expiration_date
+              -#   .expiration_date__title
+              -#     有効期限
+              -#   .expiration_date__info
+              -#     = "#{@exp_month}  /  #{@exp_year}"
         .destroy__function
           .destroy__function__link
-            -# - card = Card.find_by(user_id: current_user.id)
-            = link_to card_path, method: :delete, class: "destroy__function__link__btn" do
-              削除する
-      .payment-details
-        = link_to "トップページに戻る", root_path(current_user.id), class: "payment-details__btn"
+            - card = Card.find_by(user_id: current_user.id)
+            = link_to "削除する", card_path, method: :delete, class: "destroy__function__btn" 
+            -# =link_to "削除する", '#', class: "destroy__function__btn" 
+    .show__frame__footer
+      = link_to "トップページに戻る", "/", class: "back_top_btn"

@@ -1,9 +1,12 @@
-.destoroy
-  .destoroy__frame
-    .destoroy__frame__message
-      削除が完了しました。
-    %ul.destoroy__frame__btns
-      %li.credit_card_new_link
+.destroy
+  .destroy__header_blank
+  .destroy__frame
+    .destroy__frame__message
+      削除が完了しました
+    .destroy__frame__box
+      .destroy__frame__box__left
         = link_to "クレジットカード新規登録", new_card_path , class: "credit_card_new_link__btn"
-      %li.my_page_link
+        -# = link_to "クレジットカード新規登録", '#' , class: "credit_card_new_link__btn"
+      .destroy__frame__box__right
         = link_to "トップページに戻る", root_path(current_user.id), class: "my_page_link__btn"
+        -# = link_to "トップページに戻る", '/', class: "my_page_link__btn"

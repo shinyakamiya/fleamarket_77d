@@ -8,17 +8,18 @@ class ProductsController < ApplicationController
     @products = Product.all.order(created_at: :desc)
     @images = ProductImage.all
   end
+  
   def show
     @products = Product.find(params[:id])
-    @prefecture = Prefecture.find(@products.condition_id)
-    @condition = Condition.find(1)
-    @preparationday = PreparationDay.find(1)
+    @prefecture = Prefecture.find(@products.prefecture_id)
+    @condition = Condition.find(@products.condition_id)
+    @preparationday = PreparationDay.find(@products.preparation_day_id)
     #category表示(宮嶋)
     @category_id = @products.category_id
     @category_parent = Category.find(@category_id).parent.parent
     @category_child = Category.find(@category_id).parent
     @category_grandchild = Category.find(@category_id)
-    # @user = User.find(params[:id])
+    @user = User.find(@products.seller_id)
   end
 
   def purchase

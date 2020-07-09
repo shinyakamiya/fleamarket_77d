@@ -18,7 +18,7 @@ class ProductsController < ApplicationController
     @category_parent = Category.find(@category_id).parent.parent
     @category_child = Category.find(@category_id).parent
     @category_grandchild = Category.find(@category_id)
-    @user = User.find(params[:id])
+    # @user = User.find(params[:id])
   end
 
   def purchase

@@ -42,6 +42,10 @@
             -if @products.buyer_id.present? 
               .topContent__itemBox__body__sold
                 .topContent__itemBox__body__sold__inner SOLD
+          .main-content__photoSub
+            - @products.product_images.each do |photo|
+              = image_tag photo.src.url, class:'main-content__photoSub--small'
+      
           .topContent__itemBox__price
             %span
               ¥

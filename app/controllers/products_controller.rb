@@ -20,7 +20,6 @@ class ProductsController < ApplicationController
     @category_child = Category.find(@category_id).parent
     @category_grandchild = Category.find(@category_id)
     @user = User.find(@products.seller_id)
-    
   end
 
   def purchase

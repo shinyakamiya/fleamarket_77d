@@ -56,6 +56,9 @@
       font-size: 14px;
       .left-lists{
         display: flex;
+        .category__search {
+          color: black;
+        }
         &--left {
           padding-left: 16px;
           .btn {

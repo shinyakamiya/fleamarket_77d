@@ -10,15 +10,14 @@ class ProductsController < ApplicationController
   end
   
   def show
+    
     @products = Product.find(params[:id])
     @prefecture = Prefecture.find(@products.prefecture_id)
     @condition = Condition.find(@products.condition_id)
     @preparationday = PreparationDay.find(@products.preparation_day_id)
     #category表示(宮嶋)
-    @category_id = @products.category_id
-    @category_parent = Category.find(@category_id).parent.parent
-    @category_child = Category.find(@category_id).parent
-    @category_grandchild = Category.find(@category_id)
+    @category = @products.category
+   
     @user = User.find(@products.seller_id)
   end
 
@@ -52,7 +51,6 @@ class ProductsController < ApplicationController
 
   #親カテゴリーが選択された後のアクション(宮嶋)
   def get_category_children  
-    # binding.pry
     @category_children = Category.find_by(id: "#{params[:parent_id]}").children
   end
   
